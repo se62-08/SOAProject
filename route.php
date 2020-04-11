@@ -1,0 +1,29 @@
+<?php
+require_once "./controller/loginService.php";
+
+switch ($_GET['action']) {
+    case "login":
+        login($_POST['password']);
+        break;
+    default:
+        break;
+}
+
+
+function login($password)
+{
+    session_start();
+    
+    //$_SESSION['token']=loginService::login($password);
+    //if($_SESSION['token']->status != 401) {
+        $_SESSION['pass']=loginService::checkLogin($password); 
+    //}
+
+    if($_SESSION['pass'] != null)
+    {
+        header("Location: views/cart.php");
+    }else{
+        header("Location: index.php?error=กรอกข้อมูลไม่ถูกต้อง!");
+    }
+    
+}
