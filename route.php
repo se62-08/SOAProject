@@ -17,21 +17,18 @@ switch ($_GET['action']) {
 function login($password)
 {
     session_start();
-    
+
     //$_SESSION['token']=loginService::login($password);
     //if($_SESSION['token']->status != 401) {
-        $_SESSION['pass']=loginService::checkLogin($password); 
+    $_SESSION['pass'] = loginService::checkLogin($password);
     //}
 
-    if($_SESSION['pass'] != null)
-    {
+    if ($_SESSION['pass'] != null) {
         header("Location: views/cart.php");
-    }else{
+    } else {
         header("Location: index.php?error=กรอกข้อมูลไม่ถูกต้อง!");
     }
-    
 }
 function cart()
 {
-    
 }
