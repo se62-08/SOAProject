@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Apr 8, 2020 8:25:32 PM by Hibernate Tools 5.3.15.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="covid19" dynamic-insert="false" dynamic-update="false" mutable="true" name="th.ac.ku.kps.eng.cpe.soa.model.Vehicle" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="vehicle">
+        <id name="vid" type="java.lang.Integer">
+            <column name="VID"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="roll" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="roll" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="vehicletype" optimistic-lock="true" type="string" unique="false">
+            <column length="5" name="vehicletype" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="travels" optimistic-lock="true" sort="unsorted" table="travel">
+            <key on-delete="noaction">
+                <column name="VID" not-null="true"/>
+            </key>
+            <one-to-many class="th.ac.ku.kps.eng.cpe.soa.model.Travel" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

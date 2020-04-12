@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <?php include "../link.php" ?>
+  <?php include "./link.php" ?>
   <title>Sweet Home</title>
 </head>
 
