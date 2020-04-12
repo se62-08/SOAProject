@@ -190,3 +190,6 @@ function table2(int $column, $border = 1, $cellpadding = 1, $cellspacing = 1)
 <?php
   }
 }
+
+
+ 
