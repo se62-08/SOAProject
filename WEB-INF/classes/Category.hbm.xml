@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Apr 12, 2020 5:23:19 PM by Hibernate Tools 5.3.15.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="soa" dynamic-insert="false" dynamic-update="false" mutable="true" name="th.ac.ku.kps.cpe.eng.sao.model.Category" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="category">
+        <id name="cid" type="java.lang.Integer">
+            <column name="CID"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="cname" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="CName" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="equipments" optimistic-lock="true" sort="unsorted" table="equipment">
+            <key on-delete="noaction">
+                <column name="CID" not-null="true"/>
+            </key>
+            <one-to-many class="th.ac.ku.kps.cpe.eng.sao.model.Equipment" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

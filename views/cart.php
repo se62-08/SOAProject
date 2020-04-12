@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <?php include "../link.php" ?>
+  <?php include "./link.php" ?>
   <title>Sweet Home</title>
 </head>
 
@@ -127,6 +127,7 @@
               <div class="product-item">
                 <form action="./route.php?action=order" method="post">
                       <div class="product-image">
+                      <!-- <img src="./SOAProject/image/a.jpg" width="220" height="230" alt=images> -->
                         <img src="../image/a.jpg" width="220" height="230" alt=images>
                       </div>
                       <div class="product-title-footer">
@@ -138,6 +139,7 @@
                         </div>
                       </div>
                 </form>
+                  
               </div>
 
             </div>
@@ -193,6 +195,3 @@ function table2(int $column, $border = 1, $cellpadding = 1, $cellspacing = 1)
 <?php
   }
 }
-
-
- 

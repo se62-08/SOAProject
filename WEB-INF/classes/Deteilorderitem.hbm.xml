@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Apr 12, 2020 5:23:19 PM by Hibernate Tools 5.3.15.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="soa" dynamic-insert="false" dynamic-update="false" mutable="true" name="th.ac.ku.kps.cpe.eng.sao.model.Deteilorderitem" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="deteilorderitem">
+        <id name="doid" type="java.lang.Integer">
+            <column name="DOID"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="th.ac.ku.kps.cpe.eng.sao.model.Equipment" embed-xml="true" fetch="select" insert="true" name="equipment" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="EID" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="th.ac.ku.kps.cpe.eng.sao.model.Orderitem" embed-xml="true" fetch="select" insert="true" name="orderitem" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="OID" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="amount" optimistic-lock="true" type="int" unique="false">
+            <column name="amount" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
