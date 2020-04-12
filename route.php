@@ -1,9 +1,13 @@
 <?php
 require_once "./controller/loginService.php";
+require_once "./controller/cartService.php";
 
 switch ($_GET['action']) {
     case "login":
         login($_POST['password']);
+        break;
+    case "cart":
+        cart();
         break;
     default:
         break;
@@ -25,5 +29,9 @@ function login($password)
     }else{
         header("Location: index.php?error=กรอกข้อมูลไม่ถูกต้อง!");
     }
+    
+}
+function cart()
+{
     
 }
