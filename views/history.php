@@ -71,8 +71,10 @@
                                                         <th>วันที่</th>
                                                         <th>หมายเลขคำสั่ง</th>
                                                         <th>ราคา(บาท)</th>
+                                                        <th>สถานะ</th>
                                                         <th>รายละเอียด</th>
                                                         <th>จัดการ</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
@@ -81,8 +83,10 @@
                                                         <th>วันที่</th>
                                                         <th>หมายเลขคำสั่ง</th>
                                                         <th>ราคา(บาท)</th>
+                                                        <th>สถานะ</th>
                                                         <th>รายละเอียด</th>
                                                         <th>จัดการ</th>
+                                                        
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
@@ -92,6 +96,8 @@
                                                         <td>14/03/2563</td>
                                                         <td>RD00001</td>
                                                         <td>500</td>
+                                                        <td>เกินกำหนด</td>
+                                                        
                                                         <td>
                                                             <button type="button" id="detailRent" class="btn btn-info btn-sm tt " title='รายละเอียดการเช่า'>
                                                                 <i class="fas fa-file-alt"></i>
@@ -112,6 +118,7 @@
                                                         <td>10/03/2563</td>
                                                         <td>RD00002</td>
                                                         <td>1000</td>
+                                                        <td>ยังไม่ได้คืน</td>
                                                         <td>
                                                             <button type="button" id="btn_edit" class="btn btn-info btn-sm tt " title='รายละเอียดการเช่า'>
                                                                 <i class="fas fa-file-alt"></i>
@@ -205,6 +212,7 @@
                                     <th rowspan="1" colspan="1">ราคาต่อชิ้น(บาท)</th>
                                     <th rowspan="1" colspan="1">จำนวน</th>
                                     <th rowspan="1" colspan="1">ราคา(บาท)</th>
+                                    
 
                                 </tr>
                             </thead>
@@ -214,9 +222,9 @@
                                     <td>1</td>
                                     <td>ดอกมะลิ</td>
                                     <td>5</td>
-                                    <td>100
-                                    </td>
+                                    <td>100</td>
                                     <td>500</td>
+                                  
                                 </tr>
 
                             </tbody>
