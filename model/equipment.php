@@ -82,7 +82,7 @@ class equipment
     /**
      * @return mixed $path
      */
-    public function setPath($price)
+    public function setPath($path)
     {
         $this->path = $path;
     }
