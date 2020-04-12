@@ -31,4 +31,5 @@ function login($password)
 }
 function cart()
 {
+    header()
 }

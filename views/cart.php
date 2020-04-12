@@ -124,7 +124,7 @@
               <div class="product-item">
                 <form>
                   <div class="product-image">
-                    <img src="./image/a.jpg" width="220" height="230" alt=images>
+                    <img src="./SOAProject/image/a.jpg" width="220" height="230" alt=images>
                   </div>
                   <div class="product-title-footer">
                     <div class="product-title">vase</div>
