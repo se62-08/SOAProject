@@ -3,11 +3,31 @@ require_once "./controller/loginService.php";
 require_once "./controller/cartService.php";
 
 switch ($_GET['action']) {
+//index.php
     case "login":
         login($_POST['password']);
         break;
+//cart.php
+    case "cartOrder":
+        cartOrder();
+        break;
+    case "category":
+        category();
+        break;
     case "cart":
         cart();
+        break;
+//bill.php
+    case "bill":
+        bill();
+        break;
+
+//billPhoto.php
+    case "photographer":
+        photographer();
+        break;
+    case "billPhoto":
+        billPhoto();
         break;
     default:
         break;
@@ -29,7 +49,28 @@ function login($password)
         header("Location: index.php?error=กรอกข้อมูลไม่ถูกต้อง!");
     }
 }
-function cart()
-{
-    header()
+
+
+function cartOrder(){
+    header("Location: views/bill.php");
 }
+function category(){
+
+}
+function cart(){
+    
+}
+
+
+function bill(){
+
+}
+
+function photographer(){
+    header("Location: views/billPhoto.php");
+}
+
+function billPhoto(){
+    
+}
+

@@ -52,7 +52,7 @@
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">ทำรายการเช่าสินค้า</h6>
             </div>
-            <form action="./route.php?action=cart" method="post">
+            <form action="./route.php?action=cartOrder" method="post">
               <div class="card-body">
                 <div class="table-responsive">
                   <center>
@@ -105,16 +105,19 @@
               <div class="card-header card-bg ">
                 <span class="m-0 font-weight-bold text-primary">สินค้า</span>
               </div>
-            </div>
-            <div class="card-body">
-              <label for="category" style="font-size: 20px">หมวดหมู่สินค้า : </label>
+            <form action="./route.php?action=category" method="post">
+                </div>
+                
+                <div class="card-body">
+                  <label for="category" style="font-size: 20px">หมวดหมู่สินค้า : </label>
 
-              <select id="category">
-                <option value="a">ดอกไม้ประดับ</option>
-                <option value="b" selected>ของตกแต่งภายในอาคาร</option>
-                <option value="c">ของตกแต่งภายนอกอาคาร</option>
-              </select>
-            </div>
+                  <select id="category">
+                    <option value="a">ดอกไม้ประดับ</option>
+                    <option value="b" selected>ของตกแต่งภายในอาคาร</option>
+                    <option value="c">ของตกแต่งภายนอกอาคาร</option>
+                  </select>
+                </div>
+
             </form>
 
             <div id="product-grid">
@@ -122,18 +125,18 @@
                 <h2>Products<h2>
               </div>
               <div class="product-item">
-                <form>
-                  <div class="product-image">
-                    <img src="./image/a.jpg" width="220" height="230" alt=images>
-                  </div>
-                  <div class="product-title-footer">
-                    <div class="product-title">vase</div>
-                    <div class="product-title">950 บาท</div>
-                    <div class="cart-action">
-                      <input type="number" class="product-quantity" id="quantity" name="quantity" min="0" max="100" name="quantity" value="1" size="2">
-                      <input type="submit" value="Add to cart" class="btnAddAction">
-                    </div>
-                  </div>
+                <form action="./route.php?action=order" method="post">
+                      <div class="product-image">
+                        <img src="../image/a.jpg" width="220" height="230" alt=images>
+                      </div>
+                      <div class="product-title-footer">
+                        <div class="product-title">vase</div>
+                        <div class="product-title">950 บาท</div>
+                        <div class="cart-action">
+                          <input type="number" class="product-quantity" id="quantity" name="quantity" min="0" max="100" name="quantity" value="1" size="2">
+                          <input type="submit" value="Add to cart" class="btnAddAction">
+                        </div>
+                      </div>
                 </form>
               </div>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <?php include "link.php" ?>
+  <?php include "../link.php" ?>
   <title>Bill</title>
 </head>
 
@@ -11,7 +11,7 @@
 
     <!-- อันนี้ไว้เรียกใช้แท็บข้างๆๆ -->
     <?php include "layout_user.php" ?>
-    <?php include "helper_func.inc.php" ?>
+    <?php //include "helper_func.inc.php" ?>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -20,7 +20,7 @@
       <div id="content">
 
         <!-- อันนี้ไว้เรียกใช้แท็บบน -->
-        <?php include "Topbar.php" ?>
+        <?php include "../Topbar.php" ?>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
@@ -139,7 +139,7 @@
                 <span class="m-0 font-weight-bold text-primary">สรุปรายการ</span>
               </div>
             </div>
-            <form action="bill.php" method="POST">
+            <form action="./route.php?action=bill" method="POST">
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-bordered" id="d" width="100%" cellspacing="0">
@@ -203,3 +203,22 @@
 </body>
 
 </html>
+
+
+<?php
+function table2(int $column, $border = 1, $cellpadding = 1, $cellspacing = 1)
+{
+  if ($column == 3) {
+    ?>
+        <tr>
+            <td><?php echo "1"; ?></td>
+            <td><?php echo "<img src=\"../image/a.jpg\" width= \"70\" height=\"80\" >" ?></td>
+            <td><?php echo "000123"; ?></td>
+            <td><?php echo "แจกัน"; ?></td>
+            <td><?php echo "2"; ?></td>
+            <td><?php echo "5"; ?></td>
+            <td><?php echo "10"; ?></td>
+        </tr>
+    <?php
+    }
+}

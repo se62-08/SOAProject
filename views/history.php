@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php include "link.php" ?>
+    <?php include "../link.php" ?>
     <title>Sweet Home</title>
 </head>
 
@@ -11,8 +11,7 @@
 
         <!-- อันนี้ไว้เรียกใช้แท็บข้างๆๆ -->
         <?php include "layout_user.php" ?>
-        <?php include "helper_func.inc.php" ?>
-
+        
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -20,7 +19,7 @@
             <div id="content">
 
                 <!-- อันนี้ไว้เรียกใช้แท็บบน -->
-                <?php include "Topbar.php" ?>
+                <?php include "../Topbar.php" ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

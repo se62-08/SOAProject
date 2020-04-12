@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <?php include "link.php" ?>
+    <?php include "../link.php" ?>
 
-    <?php require_once('query.php'); ?>
+    <?php //require_once('query.php'); ?>
     <?php
 
 
@@ -28,7 +28,7 @@
             <div id="content">
 
                 <!-- อันนี้ไว้เรียกใช้แท็บบน -->
-                <?php include "Topbar.php" ?>
+                <?php include "../Topbar.php" ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -48,7 +48,7 @@
                                                 <div class=" col-12 ">
                                                     <span class=" link-active " style=" font-size: 70px; color:pink;">WELCOME</span>
                                                     <br>
-                                                    <img src="./img/ddd1.jpg" width="40%" height="100%">
+                                                    <img src="../image/ddd1.jpg" width="40%" height="100%">
                                                     <br>
                                                     <br>
                                                     <span style=" font-size: 25px; color:black;">ร้านเช่าอุปกรณ์ตกแต่ง </span>
@@ -78,7 +78,7 @@
             <i class="fas fa-angle-up"></i>
         </a>
 </body>
-<?php include_once("modal.php") ?>
+<?php //include_once("modal.php") ?>
 
 </html>
 
