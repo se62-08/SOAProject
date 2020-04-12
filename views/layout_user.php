@@ -130,23 +130,4 @@
         </a>
     </li>
     <hr class="sidebar-divider">
-    <li class="nav-item active">
-        <a class="nav-link" href="food.php">
-            <div style="text-align: center">
-                <i class="fas fa-utensils"></i>
-                <span>สินค้า&อาหาร</span>
-            </div>
-        </a>
-    </li>
-    <hr class="sidebar-divider">
-    <li class="nav-item active">
-        <a class="nav-link" href="photographer.php">
-            <div style="text-align: center">
-                <i class="fas fa-camera"></i>
-                <span>สินค้า&ช่างภาพ</span>
-            </div>
-        </a>
-    </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider">
 </ul>
