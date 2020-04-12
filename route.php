@@ -1,13 +1,13 @@
 <?php
 require_once "./controller/loginService.php";
 require_once "./controller/cartService.php";
-
+require_once "./controller/categoryCallService.php";
 switch ($_GET['action']) {
-//index.php
+        //index.php
     case "login":
         login($_POST['password']);
         break;
-//cart.php
+        //cart.php
     case "cartOrder":
         cartOrder();
         break;
@@ -17,12 +17,12 @@ switch ($_GET['action']) {
     case "cart":
         cart();
         break;
-//bill.php
+        //bill.php
     case "bill":
         bill();
         break;
 
-//billPhoto.php
+        //billPhoto.php
     case "photographer":
         photographer();
         break;
@@ -45,32 +45,34 @@ function login($password)
 
     if ($_SESSION['pass'] != null) {
         header("Location: views/cart.php");
+        $_SESSION['data'] = categoryCallService::getAll();
     } else {
         header("Location: index.php?error=กรอกข้อมูลไม่ถูกต้อง!");
     }
 }
 
 
-function cartOrder(){
+function cartOrder()
+{
     header("Location: views/bill.php");
 }
-function category(){
-
+function category()
+{
 }
-function cart(){
-    
-}
-
-
-function bill(){
-
+function cart()
+{
 }
 
-function photographer(){
+
+function bill()
+{
+}
+
+function photographer()
+{
     header("Location: views/billPhoto.php");
 }
 
-function billPhoto(){
-    
+function billPhoto()
+{
 }
-

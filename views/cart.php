@@ -1,3 +1,7 @@
+<?php
+session_start();
+print_r($_SESSION['data']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,18 +109,18 @@
               <div class="card-header card-bg ">
                 <span class="m-0 font-weight-bold text-primary">สินค้า</span>
               </div>
-            <form action="./route.php?action=category" method="post">
-                </div>
-                
-                <div class="card-body">
-                  <label for="category" style="font-size: 20px">หมวดหมู่สินค้า : </label>
+              <form action="./route.php?action=category" method="post">
+            </div>
 
-                  <select id="category">
-                    <option value="a">ดอกไม้ประดับ</option>
-                    <option value="b" selected>ของตกแต่งภายในอาคาร</option>
-                    <option value="c">ของตกแต่งภายนอกอาคาร</option>
-                  </select>
-                </div>
+            <div class="card-body">
+              <label for="category" style="font-size: 20px">หมวดหมู่สินค้า : </label>
+
+              <select id="category">
+                <option value="a">ดอกไม้ประดับ</option>
+                <option value="b" selected>ของตกแต่งภายในอาคาร</option>
+                <option value="c">ของตกแต่งภายนอกอาคาร</option>
+              </select>
+            </div>
 
             </form>
 
@@ -126,20 +130,20 @@
               </div>
               <div class="product-item">
                 <form action="./route.php?action=order" method="post">
-                      <div class="product-image">
-                      <!-- <img src="./SOAProject/image/a.jpg" width="220" height="230" alt=images> -->
-                        <img src="../image/a.jpg" width="220" height="230" alt=images>
-                      </div>
-                      <div class="product-title-footer">
-                        <div class="product-title">vase</div>
-                        <div class="product-title">950 บาท</div>
-                        <div class="cart-action">
-                          <input type="number" class="product-quantity" id="quantity" name="quantity" min="0" max="100" name="quantity" value="1" size="2">
-                          <input type="submit" value="Add to cart" class="btnAddAction">
-                        </div>
-                      </div>
+                  <div class="product-image">
+                    <!-- <img src="./SOAProject/image/a.jpg" width="220" height="230" alt=images> -->
+                    <img src="../image/a.jpg" width="220" height="230" alt=images>
+                  </div>
+                  <div class="product-title-footer">
+                    <div class="product-title">vase</div>
+                    <div class="product-title">950 บาท</div>
+                    <div class="cart-action">
+                      <input type="number" class="product-quantity" id="quantity" name="quantity" min="0" max="100" name="quantity" value="1" size="2">
+                      <input type="submit" value="Add to cart" class="btnAddAction">
+                    </div>
+                  </div>
                 </form>
-                  
+
               </div>
 
             </div>
