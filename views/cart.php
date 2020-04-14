@@ -1,3 +1,8 @@
+<?php
+session_start();
+$datacategory = $_SESSION['datacategory'];
+$dataequipment = $_SESSION['dataequipment'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,6 +53,7 @@
             </div> -->
 
           <!-- Content Row -->
+
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">ทำรายการเช่าสินค้า</h6>
@@ -105,18 +111,21 @@
               <div class="card-header card-bg ">
                 <span class="m-0 font-weight-bold text-primary">สินค้า</span>
               </div>
-            <form action="./route.php?action=category" method="post">
-                </div>
-                
-                <div class="card-body">
-                  <label for="category" style="font-size: 20px">หมวดหมู่สินค้า : </label>
+              <form action="./route.php?action=category" method="post">
+            </div>
 
-                  <select id="category">
-                    <option value="a">ดอกไม้ประดับ</option>
-                    <option value="b" selected>ของตกแต่งภายในอาคาร</option>
-                    <option value="c">ของตกแต่งภายนอกอาคาร</option>
-                  </select>
-                </div>
+            <div class="card-body">
+              <label for="category" style="font-size: 20px">หมวดหมู่สินค้า : </label>
+
+              <select id="category">
+                <option value="0">ทั้งหมด</option>
+                <?php
+                for ($i = 0; $i < count($datacategory); $i++) {
+                  echo " <option value=\"{$datacategory[$i]->cid}\">{$datacategory[$i]->cname}</option>";
+                }
+                ?>
+              </select>
+            </div>
 
             </form>
 
@@ -124,32 +133,41 @@
               <div class="txt-heading">
                 <h2>Products<h2>
               </div>
-              <div class="product-item">
-                <form action="./route.php?action=order" method="post">
-                      <div class="product-image">
-                      <!-- <img src="./SOAProject/image/a.jpg" width="220" height="230" alt=images> -->
-                        <img src="../image/a.jpg" width="220" height="230" alt=images>
-                      </div>
-                      <div class="product-title-footer">
-                        <div class="product-title">vase</div>
-                        <div class="product-title">950 บาท</div>
-                        <div class="cart-action">
-                          <input type="number" class="product-quantity" id="quantity" name="quantity" min="0" max="100" name="quantity" value="1" size="2">
-                          <input type="submit" value="Add to cart" class="btnAddAction">
-                        </div>
-                      </div>
-                </form>
-                  
-              </div>
-
             </div>
 
+            <div class="row" id="tableProduct">
+              <!-- <button onclick="refreshproduct(1)">Add to cart</button> -->
+              <?php
+              for ($i = 0; $i < count($dataequipment); $i++) {
+                echo  "<div class=\"col-3 mx-auto\" style=\"margin-top: 40px\">
+                    <div class=\"text-center\">
+                      <div class=\"product-item\">
+                        <div class=\"product-image\">
+                          <img src=\"../{$dataequipment[$i]->pathpic}\" width=\"220\" height=\"230\" alt=images>
+                        </div>
+                        <div class=\"product-title-footer\">
+                          <div class=\"product-title\">{$dataequipment[$i]->ename}</div>
+                          <div class=\"product-title\">หมวด {$dataequipment[$i]->category->cname}</div>
+                          <div class=\"product-title\">{$dataequipment[$i]->price} บาท</div>
+                          <div class=\"cart-action\">
+                            <input type=\"number\" class=\"product-quantity\" id=\"numequipment_{$dataequipment[$i]->eid}\" min=\"1\" max=\"100\" value=\"1\" size=\"2\">
+                            <button class=\"btnaddproduct\" eid=\"{$dataequipment[$i]->eid}\">Add to cart</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>";
+              }
+              ?>
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
+
     </div>
-    <!-- /.container-fluid -->
+  </div>
+  <!-- /.container-fluid -->
 
   </div>
   <!-- End of Main Content -->
@@ -165,7 +183,27 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
+  <script>
+    $(".btnaddproduct").click(function() {
+      var x = $(this).attr('eid');
+      alert(x);
+    });
+    $("#category").change(function() {
+      var x = $(this).val();
+      $.ajax('../route.php?action=refreshcategory', {
+        data: {
+          data: x
+        },
+        success: function(data, status, xhr) { // success callback function
+          console.log(data);
+          $('#tableProduct').html(data);
+        },
+        error: function(jqXhr, textStatus, errorMessage) { // error callback 
+          alert(errorMessage);
+        }
+      });
+    });
+  </script>
 
 
 </body>
