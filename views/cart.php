@@ -66,9 +66,7 @@ $dataequipment = $_SESSION['dataequipment'];
 
                       <thead>
                         <tr>
-                          <th>ลำดับ</th>
                           <th>ภาพสินค้า</th>
-                          <th>รหัสสินค้า</th>
                           <th>รายการ</th>
                           <th>จำนวน</th>
                           <th>ราคาเช่าต่อชิ้น(บาท)</th>
@@ -77,14 +75,8 @@ $dataequipment = $_SESSION['dataequipment'];
                         </tr>
                       </thead>
 
-                      <tbody>
-                        <?php
-                        //getProducts();
-                        //$products_list = getProducts();
-                        //@var_dump($products_list);
-                        table2(4);
-                        // table2(13);
-                        ?>
+                      <tbody id="tableOrder">
+
                       </tbody>
                     </table>
                   </center>
@@ -184,9 +176,24 @@ $dataequipment = $_SESSION['dataequipment'];
     <i class="fas fa-angle-up"></i>
   </a>
   <script>
-    $(".btnaddproduct").click(function() {
+    $(document).on("click", ".btnaddproduct", function() {
       var x = $(this).attr('eid');
-      alert(x);
+      var num = $("#numequipment_" + x).val();
+      $.ajax('../route.php?action=addequipment', {
+        data: {
+          data: x,
+          amount: num
+        },
+        success: function(data, status, xhr) { // success callback function
+          $("#tableOrder").append(data);
+        },
+        error: function(jqXhr, textStatus, errorMessage) { // error callback 
+          alert(errorMessage);
+        }
+      });
+    });
+    $(document).on("click", ".btndel", function() {
+      $(this).parent().parent().remove();
     });
     $("#category").change(function() {
       var x = $(this).val();
@@ -195,7 +202,6 @@ $dataequipment = $_SESSION['dataequipment'];
           data: x
         },
         success: function(data, status, xhr) { // success callback function
-          console.log(data);
           $('#tableProduct').html(data);
         },
         error: function(jqXhr, textStatus, errorMessage) { // error callback 

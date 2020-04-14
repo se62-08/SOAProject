@@ -33,6 +33,12 @@ switch ($_GET['action']) {
     case "refreshcategory":
         $id = $_GET['data'];
         refreshcategory($id);
+        break;
+    case "addequipment":
+        $id = $_GET['data'];
+        $num = $_GET['amount'];
+        addequipment($id, $num);
+        break;
     default:
         break;
 }
@@ -110,5 +116,23 @@ function  refreshcategory($id)
             </div>
           </div>";
     }
+    echo $content;
+}
+function  addequipment($id, $num)
+{
+    $data = equipmentCallService::getEquipmentsbyId($id, $num);
+    $total = $num * $data[0]->price;
+    $content = "<tr>
+                    <td><img src=\"../{$data[0]->pathpic}\" width=\"40\" height=\"40\" alt=images></td>
+                    <td>{$data[0]->ename}</td>
+                    <td>$num</td>
+                    <td>{$data[0]->price}</td>
+                    <td>$total</td>
+                    <td style=\"text-align:center;\">
+                    <button type=\"button\" id=\"delete\" class=\"btn btn-danger btn-sm btndel\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"ยกเลิก\">
+                        <i class=\"far fa-trash-alt\"></i>
+                    </button>
+                    </td>
+                </tr>";
     echo $content;
 }
