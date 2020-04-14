@@ -2,7 +2,11 @@
 <html lang="en">
 
 <head>
-  <?php include "../link.php" ?>
+  <?php
+  session_start();
+  include "../link.php";
+  $listOrder = $_SESSION['listOrder'];
+  ?>
   <title>Bill</title>
 </head>
 
@@ -11,7 +15,8 @@
 
     <!-- อันนี้ไว้เรียกใช้แท็บข้างๆๆ -->
     <?php include "layout_user.php" ?>
-    <?php //include "helper_func.inc.php" ?>
+    <?php //include "helper_func.inc.php" 
+    ?>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -51,6 +56,9 @@
             </div> -->
 
           <!-- Content Row -->
+          <?php
+          print_r($listOrder);
+          ?>
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">โปรดกรอกข้อมูล</h6>
@@ -167,16 +175,16 @@
                 </div>
               </div>
               <div class="row mb-3">
-                      <div class="col-xl-5 col-2 text-right ">
-                        <span>
-                          <a href=" ./cart.php">
-                            <button type="button" id="btn_green" class="btn btn-success">
-                              ยืนยัน
-                            </button>
-                          </a>
-                        </span>
-                      </div>
-                    </div>
+                <div class="col-xl-5 col-2 text-right ">
+                  <span>
+                    <a href=" ./cart.php">
+                      <button type="button" id="btn_green" class="btn btn-success">
+                        ยืนยัน
+                      </button>
+                    </a>
+                  </span>
+                </div>
+              </div>
             </form>
           </div>
         </div>
@@ -209,16 +217,16 @@
 function table2(int $column, $border = 1, $cellpadding = 1, $cellspacing = 1)
 {
   if ($column == 3) {
-    ?>
-        <tr>
-            <td><?php echo "1"; ?></td>
-            <td><?php echo "<img src=\"../image/a.jpg\" width= \"70\" height=\"80\" >" ?></td>
-            <td><?php echo "000123"; ?></td>
-            <td><?php echo "แจกัน"; ?></td>
-            <td><?php echo "2"; ?></td>
-            <td><?php echo "5"; ?></td>
-            <td><?php echo "10"; ?></td>
-        </tr>
-    <?php
-    }
+?>
+    <tr>
+      <td><?php echo "1"; ?></td>
+      <td><?php echo "<img src=\"../image/a.jpg\" width= \"70\" height=\"80\" >" ?></td>
+      <td><?php echo "000123"; ?></td>
+      <td><?php echo "แจกัน"; ?></td>
+      <td><?php echo "2"; ?></td>
+      <td><?php echo "5"; ?></td>
+      <td><?php echo "10"; ?></td>
+    </tr>
+<?php
+  }
 }

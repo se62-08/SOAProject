@@ -3,6 +3,7 @@ require_once "./controller/loginService.php";
 require_once "./controller/cartService.php";
 require_once "./controller/categoryCallService.php";
 require_once "./controller/equipmentCallService.php";
+session_start();
 switch ($_GET['action']) {
         //index.php
     case "login":
@@ -39,6 +40,10 @@ switch ($_GET['action']) {
         $num = $_GET['amount'];
         addequipment($id, $num);
         break;
+    case "confirmOrder":
+        $data = $_GET['data'];
+        $_SESSION['listOrder'] = $data;
+        break;
     default:
         break;
 }
@@ -46,7 +51,6 @@ switch ($_GET['action']) {
 
 function login($password)
 {
-    session_start();
 
     //$_SESSION['token']=loginService::login($password);
     //if($_SESSION['token']->status != 401) {
@@ -124,6 +128,7 @@ function  addequipment($id, $num)
     $total = $num * $data[0]->price;
     $content = "<tr>
                     <td><img src=\"../{$data[0]->pathpic}\" width=\"40\" height=\"40\" alt=images></td>
+                    <td style=\"display:none;\">{$data[0]->eid}</td>
                     <td>{$data[0]->ename}</td>
                     <td>$num</td>
                     <td>{$data[0]->price}</td>

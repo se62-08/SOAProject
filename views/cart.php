@@ -62,7 +62,7 @@ $dataequipment = $_SESSION['dataequipment'];
               <div class="card-body">
                 <div class="table-responsive">
                   <center>
-                    <table class="table table-bordered" id="d" style="text-align:center;" width="80%" cellspacing="0">
+                    <table class="table table-bordered" id="tableOrderAll" style="text-align:center;" width="80%" cellspacing="0">
 
                       <thead>
                         <tr>
@@ -82,12 +82,9 @@ $dataequipment = $_SESSION['dataequipment'];
                   </center>
                   <!-- <img src="./img/a.jpg" width= “30” height=“50”> -->
                   <span>
-
-                    <a href=" ./bill.php">
-                      <button type="button" id="btn_green" class="btn btn-success">
-                        ยืนยัน
-                      </button>
-                    </a>
+                    <button type="button" id="btn_green" class="btn btn-success btnconfirm">
+                      ยืนยัน
+                    </button>
 
                   </span>
 
@@ -194,6 +191,27 @@ $dataequipment = $_SESSION['dataequipment'];
     });
     $(document).on("click", ".btndel", function() {
       $(this).parent().parent().remove();
+    });
+    $(document).on("click", ".btnconfirm", function() {
+      var tbl = $('#tableOrderAll tr:has(td)').map(function(i, v) {
+        var $td = $('td', this);
+        return {
+          id: $td.eq(1).text(),
+          amount: $td.eq(3).text()
+        }
+      }).get();
+      $.ajax('../route.php?action=confirmOrder', {
+        data: {
+          data: tbl
+        },
+        success: function(data, status, xhr) { // success callback function
+          window.location.replace('./bill.php');
+        },
+        error: function(jqXhr, textStatus, errorMessage) { // error callback 
+          alert(errorMessage);
+        }
+      });
+
     });
     $("#category").change(function() {
       var x = $(this).val();
