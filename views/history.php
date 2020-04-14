@@ -68,30 +68,42 @@
                                                 <thead>
                                                     <tr>
                                                         <th>ลำดับ</th>
-                                                        <th>วันที่</th>
-                                                        <th>หมายเลขคำสั่ง</th>
+                                                        <th>หมายเลขคำสั่งจอง</th>
+                                                        <th>รหัสธุรกิจ</th>
+                                                        <th>วันที่จอง</th>
+                                                        <th>วันที่คืน</th>
                                                         <th>ราคา(บาท)</th>
+                                                        <th>สถานะ</th>
                                                         <th>รายละเอียด</th>
-                                                        <th>จัดการ</th>
+                                                        <th>การจัดการ</th>
+                        
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
                                                     <tr>
                                                         <th>ลำดับ</th>
-                                                        <th>วันที่</th>
-                                                        <th>หมายเลขคำสั่ง</th>
+                                                        <th>หมายเลขคำสั่งจอง</th>
+                                                        <th>รหัสธุรกิจ</th>
+                                                        <th>วันที่จอง</th>
+                                                        <th>วันที่คืน</th>
                                                         <th>ราคา(บาท)</th>
+                                                        <th>สถานะ</th>
                                                         <th>รายละเอียด</th>
-                                                        <th>จัดการ</th>
+                                                        <th>การจัดการ</th>
+                                                        
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
 
                                                     <tr style="text-align:center;">
                                                         <td>1</td>
-                                                        <td>14/03/2563</td>
                                                         <td>RD00001</td>
+                                                        <td>SOA_03</td>
+                                                        <td>14/03/2563</td>
+                                                        <td>20/03/2563</td>
                                                         <td>500</td>
+                                                        <td>เกินกำหนด</td>
+                                                        
                                                         <td>
                                                             <button type="button" id="detailRent" class="btn btn-info btn-sm tt " title='รายละเอียดการเช่า'>
                                                                 <i class="fas fa-file-alt"></i>
@@ -109,9 +121,12 @@
                                                     </tr>
                                                     <tr style="text-align:center;">
                                                         <td>2</td>
-                                                        <td>10/03/2563</td>
                                                         <td>RD00002</td>
+                                                        <td>SOA_03</td>
+                                                        <td>18/03/2563</td>
+                                                        <td>21/03/2563</td>
                                                         <td>1000</td>
+                                                        <td>ยังไม่ได้คืน</td>
                                                         <td>
                                                             <button type="button" id="btn_edit" class="btn btn-info btn-sm tt " title='รายละเอียดการเช่า'>
                                                                 <i class="fas fa-file-alt"></i>
@@ -205,6 +220,7 @@
                                     <th rowspan="1" colspan="1">ราคาต่อชิ้น(บาท)</th>
                                     <th rowspan="1" colspan="1">จำนวน</th>
                                     <th rowspan="1" colspan="1">ราคา(บาท)</th>
+                                    
 
                                 </tr>
                             </thead>
@@ -214,9 +230,9 @@
                                     <td>1</td>
                                     <td>ดอกมะลิ</td>
                                     <td>5</td>
-                                    <td>100
-                                    </td>
+                                    <td>100</td>
                                     <td>500</td>
+                                  
                                 </tr>
 
                             </tbody>

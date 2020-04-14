@@ -10,6 +10,7 @@ class orderItem
     public $dateEnd;
     public  $totalprice;
     public $status;
+    public $owner;
     /**
      * User constructor.
      */
@@ -130,6 +131,20 @@ class orderItem
         $this->status = $status;
     }
     /**
-     * @return mixed $status
+     * @return mixed 
+     */
+    public function getOwnwe()
+    {
+        return $this->owner;
+    }
+    /**
+     * @return mixed $owner
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+    }
+    /**
+     * @return mixed 
      */
 }

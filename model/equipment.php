@@ -6,6 +6,7 @@ class equipment
     public $ename;
     public $cid;
     public $price;
+    public $path;
 
 
     /**
@@ -70,6 +71,20 @@ class equipment
     public function setPrice($price)
     {
         $this->price = $price;
+    }
+    /**
+     * @return mixed
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+    /**
+     * @return mixed $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
     }
     /**
      * @return mixed

@@ -60,10 +60,10 @@
                         </div>
                         <div class="row mb-3">
                           <div class="col-xl-4 col-2 text-right ">
-                            <label for="day">ระยะเวลาการเช่าสินค้า : </label>
+                            <label for="day">วันที่คืนสินค้า : </label>
                           </div>
                           <div class="col-xl-6 col-6 ">
-                            <input type="number" class="customer-day" id="day" name="day" min="1" max="30" name="quantity" value="1" size="2">
+                            <input type="date" id="myDate" name="myDate" value="">
                           </div>
                         </div>
                         <div class="row mb-3">

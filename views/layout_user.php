@@ -130,4 +130,13 @@
         </a>
     </li>
     <hr class="sidebar-divider">
+    <li class="nav-item active">
+        <a class="nav-link" href="stock.php">
+            <div style="text-align: center">
+                <i class="fas fa-archive"></i>
+                <span>สินค้า&ช่างภาพ</span>
+            </div>
+        </a>
+    </li>
+    <hr class="sidebar-divider">
 </ul>

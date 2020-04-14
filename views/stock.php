@@ -11,7 +11,7 @@
 
         <!-- อันนี้ไว้เรียกใช้แท็บข้างๆๆ -->
         <?php include "layout_user.php" ?>
-        
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -114,7 +114,7 @@
                                                         <td>1</td>
                                                         <td>
                                                             <div class="product-image">
-                                                                <img src="./img/mali.jpg" width="100" height="100" alt=images>
+                                                                <img src="../image/mali.jpg" width="100" height="100" alt=images>
                                                             </div>
                                                         </td>
                                                         <td>ดอกไม้</td>
@@ -136,7 +136,7 @@
                                                         <td>2</td>
                                                         <td>
                                                             <div class="product-image">
-                                                                <img src="./img/Princess.jpg" width="100" height="100" alt=images>
+                                                                <img src="../image/Princess.jpg" width="100" height="100" alt=images>
                                                             </div>
                                                         </td>
                                                         <td>ธงลายการ์ตูน</td>
@@ -195,7 +195,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <img src="./img/Add_Image.png" alt="images" style="width:100%;max-width:500px">
+                                                <img src="../image/Add_Image.png" alt="images" style="width:100%;max-width:500px">
                                             </div>
                                             <div class="row mt-3">
                                                 <div class="col-xl-12 col-12">
@@ -287,7 +287,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <img src="./img/mali.jpg" alt="images" style="width:100%;max-width:500px">
+                                                <img src="../image/mali.jpg" alt="images" style="width:100%;max-width:500px">
                                             </div>
                                             <div class="row mt-3">
                                                 <div class="col-xl-12 col-12">
