@@ -45,7 +45,7 @@ function login($password)
 
     if ($_SESSION['pass'] != null) {
         header("Location: views/cart.php");
-        $_SESSION['data'] = categoryCallService::getAll();
+        $_SESSION['datacategory'] = categoryCallService::getAll();
     } else {
         header("Location: index.php?error=กรอกข้อมูลไม่ถูกต้อง!");
     }

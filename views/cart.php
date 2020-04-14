@@ -1,6 +1,6 @@
 <?php
 session_start();
-print_r($_SESSION['data']);
+$datacategory = ($_SESSION['data']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,9 +116,12 @@ print_r($_SESSION['data']);
               <label for="category" style="font-size: 20px">หมวดหมู่สินค้า : </label>
 
               <select id="category">
-                <option value="a">ดอกไม้ประดับ</option>
-                <option value="b" selected>ของตกแต่งภายในอาคาร</option>
-                <option value="c">ของตกแต่งภายนอกอาคาร</option>
+                <option value="0">ทั้งหมด</option>
+                <?php
+                for ($i = 0; $i < count($datacategory); $i++) {
+                  echo " <option value=\"{$datacategory[$i]->cid}\">{$datacategory[$i]->cname}</option>";
+                }
+                ?>
               </select>
             </div>
 

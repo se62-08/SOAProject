@@ -13,6 +13,7 @@ class categoryCallService
             curl_close($curl);
             die('error occured during curl exec. Additioanl info: ' . var_export($info));
         }
+        if (json_decode($curl_response)->status == null) return null;
         curl_close($curl);
         return json_decode(json_decode($curl_response)->result);
     }
