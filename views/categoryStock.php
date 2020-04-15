@@ -107,7 +107,7 @@ $datacategory = $_SESSION['datacategory'];
                                                                         <button type=\"button\"  class=\"btn btn-warning btn-sm tt editCategory\" cid=\"{$datacategory[$i]->cid}\" cname=\"{$datacategory[$i]->cname}\" title='แก้ไขหมวดหมู่'>
                                                                             <i class=\"fas fa-edit\"></i>
                                                                         </button>
-                                                                        <button type=\"button\"  class=\"btn btn-danger btn-sm tt del_btn\" title='ลบหมวดหมู่'>
+                                                                        <button type=\"button\"  class=\"btn btn-danger btn-sm tt del_btn\" cid=\"{$datacategory[$i]->cid}\" cname=\"{$datacategory[$i]->cname}\" title='ลบหมวดหมู่'>
                                                                             <i class=\"far fa-trash-alt\"></i>
                                                                         </button>
 
@@ -162,18 +162,19 @@ $datacategory = $_SESSION['datacategory'];
         </form>
     </div>
     <div id="modalEditCategory" class="modal fade">
-        <form class="modal-dialog modal-lg ">
+        <form class="modal-dialog modal-lg " action="../route.php?action=editcategory" method="post">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#eecc0b">
-                    <h4 class="modal-title" style="color:white">แก้ไขหมวดหมู่</h4>
+                    <h4 class="modal-title" style="color:white">แก้ไขชื่อหมวดหมู่</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
-                            <span>หมวดหมู่ :</span>
+                            <span>ชื่อหมวดหมู่ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="" name="" value="" placeholder="ดอกไม้" maxlength="100">
+                            <input type="hidden" class="form-control" id="ecid" name="ecid" value="">
+                            <input type="text" class="form-control" id="ename" name="ename" value="" placeholder="ดอกไม้">
                         </div>
                     </div>
                 </div>
@@ -202,7 +203,11 @@ $datacategory = $_SESSION['datacategory'];
         $('.tt').tooltip({
             trigger: "hover"
         });
-        $('#editCategory').click(function() {
+        $('.editCategory').click(function() {
+            var id = $(this).attr('cid');
+            var name = $(this).attr('cname');
+            $('#ecid').val(id);
+            $('#ename').val(name);
             $("#modalEditCategory").modal();
         });
         console.log("ready!");
@@ -210,10 +215,12 @@ $datacategory = $_SESSION['datacategory'];
             $("#modalAddCategory").modal('show');
         });
         $('[data-toggle="tooltip"]').tooltip();
-        $('#del_btn').click(function() {
+        $('.del_btn').click(function() {
+            var id = $(this).attr('cid');
+            var name = $(this).attr('cname');
             swal({
                     title: "คุณต้องการลบ",
-                    text: "ดอกไม้หรือไม่ ?",
+                    text: name + " หรือไม่ ?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -224,9 +231,20 @@ $datacategory = $_SESSION['datacategory'];
                             icon: "success",
                             buttons: false
                         });
-                        // delete_1(uid);
+
                         setTimeout(function() {
-                            location.reload();
+                            $.ajax('../route.php?action=deletecategory', {
+                                data: {
+                                    cid: id
+                                },
+                                success: function(data, status, xhr) {
+
+                                    window.location.replace('../route.php?action=category');
+                                },
+                                error: function(jqXhr, textStatus, errorMessage) { // error callback 
+                                    alert(errorMessage);
+                                }
+                            });
                         }, 1500);
                     } else {
                         swal("การลบไม่สำเร็จ");

@@ -95,7 +95,7 @@
 
     <!-- Nav Item - Detail order -->
     <li class="nav-item active">
-        <a class="nav-link" href="cart.php">
+        <a class="nav-link" href="../route.php?action=cart">
             <div style="text-align: center">
                 <i class="fas fa-shopping-cart"></i>
                 <span>ทำรายการเช่าสินค้า</span>

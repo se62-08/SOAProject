@@ -66,6 +66,15 @@ switch ($_GET['action']) {
         $cname = $_POST['cname'];
         addcategory($cname);
         break;
+    case "editcategory":
+        $cname = $_POST['ename'];
+        $ecid = $_POST['ecid'];
+        editcategory($ecid, $cname);
+        break;
+    case "deletecategory":
+        $cid = $_GET['cid'];
+        deletecategory($cid);
+        break;
     default:
         break;
 }
@@ -99,6 +108,9 @@ function category()
 }
 function cart()
 {
+    header("Location: views/cart.php");
+    $_SESSION['datacategory'] = categoryCallService::getAll();
+    $_SESSION['dataequipment'] = equipmentCallService::getAll();
 }
 
 
@@ -229,4 +241,18 @@ function   addcategory($cname)
 {
     categoryCallService::createCategory($cname);
     category();
+}
+function   editcategory($ecid, $cname)
+{
+    $array = array();
+    $array['cid'] = $ecid;
+    $array['cname'] = $cname;
+    categoryCallService::updateCategory($array);
+    category();
+}
+function   deletecategory($cid)
+{
+    $obj = categoryCallService::getCategoryById($cid);
+    categoryCallService::deleteCategory($obj[0]);
+    //category();
 }
