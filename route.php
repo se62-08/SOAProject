@@ -62,6 +62,10 @@ switch ($_GET['action']) {
         $id = $_GET['oid'];
         deleteOrder($id);
         break;
+    case "addcategory":
+        $cname = $_POST['cname'];
+        addcategory($cname);
+        break;
     default:
         break;
 }
@@ -90,6 +94,8 @@ function cartOrder()
 }
 function category()
 {
+    header("Location: views/categoryStock.php");
+    $_SESSION['datacategory'] = categoryCallService::getAll();
 }
 function cart()
 {
@@ -218,4 +224,9 @@ function   deleteOrder($id)
         deteilOrderItemCallService::deleteDeteilOrderItem($objDetailOrder[$i]);
     }
     orderitemCallService::deleteOrderitem($objOrder[0]);
+}
+function   addcategory($cname)
+{
+    categoryCallService::createCategory($cname);
+    category();
 }
