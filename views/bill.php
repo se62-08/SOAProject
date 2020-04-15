@@ -5,7 +5,18 @@
   <?php
   session_start();
   include "../link.php";
-  $listOrder = $_SESSION['listOrder'];
+  require_once("../controller/equipmentCallService.php");
+  $list = $_SESSION['listOrder'];
+  $listOrder = array();
+  $total = 0;
+  for ($i = 0; $i < count($list); $i++) {
+    $obj = equipmentCallService::getEquipmentsbyId($list[$i]['id']);
+    $obj[0]->amount = $list[$i]['amount'];
+    array_push($listOrder, $obj[0]);
+    $total += $list[$i]['amount'] * $listOrder[$i]->price;
+  }
+  $_SESSION['listOrder'] = $listOrder;
+
   ?>
   <title>Bill</title>
 </head>
@@ -31,32 +42,9 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <!-- <div bgcolor=“green” class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">สินค้าทั้งหมดที่ลูกค้าต้องการ</h1>
-          </div> -->
-
-          <!-- ตัวอย่างและตำแหน่งของ card -->
-          <!-- <div class="row">
-              <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                  <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                      <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                      </div>
-                      <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
           <!-- Content Row -->
           <?php
+          print_r($list);
           print_r($listOrder);
           ?>
           <div class="card shadow mb-4">
@@ -64,73 +52,79 @@
               <h6 class="m-0 font-weight-bold text-primary">โปรดกรอกข้อมูล</h6>
             </div>
             <div id="product-grid">
-              <!-- <div class="txt-heading"><h3>ข้อมูลการเช่าสินค้า<h3></div><br/> -->
               <div class="customer-data">
-
-                <!-- <div class="customer-title">โปรดกรอกข้อมูล</div><br/> -->
                 <div class="modal-body" id="addModalBody">
-                  <div class="container">
-                    <div class="row mb-3">
-                      <div class="col-xl-4 col-2 text-right ">
-                        <label for="name">ชื่อ-สกุล : </label>
+                  <form action="../route.php?action=summitOrder" method="post">
+                    <div class="container">
+                      <input type="hidden" name="total" id="total" value="<?= $total ?>">
+                      <div class="row mb-3">
+                        <div class="col-xl-4 col-2 text-right ">
+                          <label for="name">ชื่อ-สกุล : </label>
+                        </div>
+                        <div class="col-xl-6 col-6 ">
+                          <input type="text" name="name">
+                        </div>
                       </div>
-                      <div class="col-xl-6 col-6 ">
-                        <input type="text" name="name">
+                      <div class="row mb-3">
+                        <div class="col-xl-4 col-2 text-right ">
+                          <label for="day">วันที่เช่าสินค้า : </label>
+                        </div>
+                        <div class="col-xl-6 col-6 ">
+                          <input type="date" id="myDateS" class="datedata" name="myDateS" value="<?= date("Y-m-d") ?>">
+                        </div>
                       </div>
-                    </div>
-                    <div class="row mb-3">
-                      <div class="col-xl-4 col-2 text-right ">
-                        <label for="day">วันที่เช่าสินค้า : </label>
+                      <div class="row mb-3">
+                        <div class="col-xl-4 col-2 text-right ">
+                          <label for="day">วันที่คืนสินค้า : </label>
+                        </div>
+                        <div class="col-xl-6 col-6 ">
+                          <input type="date" id="myDateE" class="datedata" name="myDateE" value="<?= date("Y-m-d") ?>">
+                        </div>
                       </div>
-                      <div class="col-xl-6 col-6 ">
-                        <input type="date" id="myDate" name="myDate" value="">
+                      <div class="row mb-3">
+                        <div class="col-xl-4 col-2 text-right ">
+                          <label for="day">เบอร์โทร : </label>
+                        </div>
+                        <div class="col-xl-6 col-6 ">
+                          <input type="text" name="tel">
+                        </div>
                       </div>
-                    </div>
-                    <div class="row mb-3">
-                      <div class="col-xl-4 col-2 text-right ">
-                        <label for="day">วันที่คืนสินค้า : </label>
+                      <div class="row mb-3">
+                        <div class="col-xl-4 col-2 text-right ">
+                          <label for="day">e-mail : </label>
+                        </div>
+                        <div class="col-xl-6 col-6 ">
+                          <input type="text" name="email">
+                        </div>
                       </div>
-                      <div class="col-xl-6 col-6 ">
-                        <input type="date" id="myDate" name="myDate" value="">
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <div class="col-xl-4 col-2 text-right ">
-                        <label for="day">เบอร์โทร : </label>
-                      </div>
-                      <div class="col-xl-6 col-6 ">
-                        <input type="text" name="tel">
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <div class="col-xl-4 col-2 text-right ">
-                        <label for="day">e-mail : </label>
-                      </div>
-                      <div class="col-xl-6 col-6 ">
-                        <input type="text" name="e-mail">
-                      </div>
-                    </div>
-                  </div>
+                      <div class="row mb-3">
+                        <div class="col-xl-5 col-2 text-right ">
+                          <span>
 
+                            <button type="summit" id="btn_green" class="btn btn-success">
+                              ยืนยัน
+                            </button>
+
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">ยอดที่ต้องชำระ</h6>
             </div>
             <div id="product-grid">
-              <!-- <div class="txt-heading"><h3>ข้อมูลการเช่าสินค้า<h3></div><br/> -->
               <div class="customer-data">
-
-                <!-- <div class="customer-title">โปรดกรอกข้อมูล</div><br/> -->
                 <div class="modal-body" id="addModalBody">
                   <div class="container">
                     <div class="row mb-3">
                       <div class="col-xl-4 col-2 text-right ">
-                        <label for="name">ราคารวมทั้งหมด : 1900 บาท</label>
+                        <label for="name">ราคารวมทั้งหมด : <span id="totalprice"><?= $total ?></span> บาท</label>
                       </div>
                     </div>
                   </div>
@@ -138,55 +132,46 @@
               </div>
             </div>
           </div>
-
-
-
           <div class="card shadow mb-4">
             <div class="card">
               <div class="card-header card-bg ">
                 <span class="m-0 font-weight-bold text-primary">สรุปรายการ</span>
               </div>
             </div>
-            <form action="./route.php?action=bill" method="POST">
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered" id="d" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th>ลำดับ</th>
-                        <th>ภาพสินค้า</th>
-                        <th>รหัสสินค้า</th>
-                        <th>รายการ</th>
-                        <th>จำนวน</th>
-                        <th>ราคา</th>
-                        <th>ราคารวม</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      //getProducts();
-                      //$products_list = getProducts();
-                      //@var_dump($products_list);
-                      table2(3);
-                      ?>
-                    </tbody>
-                  </table>
-                  <!-- <img src="./img/a.jpg" width= “30” height=“50”> -->
-                </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" style="text-align:center;" id="d" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ภาพสินค้า</th>
+                      <th>รายการ</th>
+                      <th>จำนวน</th>
+                      <th>ราคา</th>
+                      <th>ราคารวม</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    for ($i = 0; $i < count($listOrder); $i++) {
+                      $totalp = $listOrder[$i]->amount * $listOrder[$i]->price;
+                      echo "<tr>
+                                  <td><img src=\"../{$listOrder[$i]->pathpic}\" width=\"40\" height=\"40\" alt=images></td>
+                                  <td>{$listOrder[$i]->ename}</td>
+                                  <td>{$listOrder[$i]->amount}</td>
+                                  <td>{$listOrder[$i]->price}</td>
+                                  <td>$totalp</td>
+                              </tr>";
+                    }
+                    ?>
+                  </tbody>
+                </table>
+                <!-- <img src="./img/a.jpg" width= “30” height=“50”> -->
               </div>
-              <div class="row mb-3">
-                <div class="col-xl-5 col-2 text-right ">
-                  <span>
-                    <a href=" ./cart.php">
-                      <button type="button" id="btn_green" class="btn btn-success">
-                        ยืนยัน
-                      </button>
-                    </a>
-                  </span>
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
+
+
+
         </div>
       </div>
       <!-- /.container-fluid -->
@@ -206,27 +191,26 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-
+  <script>
+    $(".datedata").change(function() {
+      var date1 = $('#myDateS').val();
+      var date2 = $('#myDateE').val(); //myDateS
+      date1 = date1.split("-");
+      date2 = date2.split("-");
+      sDate = new Date(date1[0], date1[1] - 1, date1[2]);
+      eDate = new Date(date2[0], date2[1] - 1, date2[2]);
+      var daysDiff = Math.round((eDate - sDate) / 86400000);
+      var numday = daysDiff + 1;
+      if (numday < 1) {
+        $('#totalprice').html('กรุณากรอกวันให้ถูกต้อง');
+      } else {
+        var sum = numday * <?= $total ?>;
+        $('#totalprice').html(sum);
+        $('#total').val(sum);
+      }
+    });
+  </script>
 
 </body>
 
 </html>
-
-
-<?php
-function table2(int $column, $border = 1, $cellpadding = 1, $cellspacing = 1)
-{
-  if ($column == 3) {
-?>
-    <tr>
-      <td><?php echo "1"; ?></td>
-      <td><?php echo "<img src=\"../image/a.jpg\" width= \"70\" height=\"80\" >" ?></td>
-      <td><?php echo "000123"; ?></td>
-      <td><?php echo "แจกัน"; ?></td>
-      <td><?php echo "2"; ?></td>
-      <td><?php echo "5"; ?></td>
-      <td><?php echo "10"; ?></td>
-    </tr>
-<?php
-  }
-}

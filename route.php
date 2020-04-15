@@ -3,6 +3,7 @@ require_once "./controller/loginService.php";
 require_once "./controller/cartService.php";
 require_once "./controller/categoryCallService.php";
 require_once "./controller/equipmentCallService.php";
+require_once "./controller/orderitemCallService.php";
 session_start();
 switch ($_GET['action']) {
         //index.php
@@ -43,6 +44,9 @@ switch ($_GET['action']) {
     case "confirmOrder":
         $data = $_GET['data'];
         $_SESSION['listOrder'] = $data;
+        break;
+    case "summitOrder":
+        summitOrder();
         break;
     default:
         break;
@@ -140,4 +144,19 @@ function  addequipment($id, $num)
                     </td>
                 </tr>";
     echo $content;
+}
+function  summitOrder()
+{
+    $listOrder = $_SESSION['listOrder'];
+    $name = $_POST['name'];
+    $myDateS = $_POST['myDateS'];
+    $myDateE = $_POST['myDateE'];
+    $tel = $_POST['tel'];
+    $email = $_POST['email'];
+    $total = $_POST['total'];
+    $objOrderNew = orderitemCallService::createOrderitem($name, $myDateS, $myDateE, $tel, $email, $total);
+    $objOrderNew[0];
+
+
+    //header("Location: views/cart.php");
 }
