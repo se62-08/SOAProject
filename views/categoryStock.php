@@ -1,3 +1,7 @@
+<?php
+session_start();
+$datacategory = $_SESSION['datacategory'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +15,8 @@
 
         <!-- อันนี้ไว้เรียกใช้แท็บข้างๆๆ -->
         <?php include "layout_user.php" ?>
-        <?php //include "helper_func.inc.php" ?>
+        <?php //include "helper_func.inc.php" 
+        ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -41,7 +46,7 @@
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">หมวดหมู่สินค้า
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10 หมวดหมู่</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= count($datacategory) ?> หมวดหมู่</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-home fa-2x"></i>
@@ -79,59 +84,42 @@
                             <div class="table-responsive">
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row center">
-                                        <div class="col-sm-12">
-                                            <table class="table table-bordered" id="d" width="100%" cellspacing="0">
+
+                                        <div class="col-sm-8" style="margin-left:15% ">
+                                            <table class="table table-bordered" style="text-align:center;" id="d" width="50%" cellspacing="0">
 
                                                 <thead>
                                                     <tr>
                                                         <th>ลำดับ</th>
                                                         <th>หมวดหมู่</th>
-                                                        <th>จำนวนที่มี</th>
                                                         <th>จัดการ</th>
                                                     </tr>
                                                 </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>ลำดับ</th>
-                                                        <th>หมวดหมู่</th>
-                                                        <th>จำนวนที่มี</th>
-                                                        <th>จัดการ</th>
-                                                    </tr>
-                                                </tfoot>
                                                 <tbody>
+                                                    <?php
+                                                    for ($i = 0; $i < count($datacategory); $i++) {
+                                                        $num = $i + 1;
+                                                        echo "  <tr style=\"text-align:center;\">
+                                                                    <td>$num</td>
+                                                                    <td>{$datacategory[$i]->cname}</td>
+                                                                    
+                                                                    <td>
+                                                                        <button type=\"button\"  class=\"btn btn-warning btn-sm tt editCategory\" cid=\"{$datacategory[$i]->cid}\" cname=\"{$datacategory[$i]->cname}\" title='แก้ไขหมวดหมู่'>
+                                                                            <i class=\"fas fa-edit\"></i>
+                                                                        </button>
+                                                                        <button type=\"button\"  class=\"btn btn-danger btn-sm tt del_btn\" title='ลบหมวดหมู่'>
+                                                                            <i class=\"far fa-trash-alt\"></i>
+                                                                        </button>
 
-                                                    <tr style="text-align:center;">
-                                                        <td>1</td>
-                                                        <td>ดอกไม้</td>
-                                                        <td>20</td>
-                                                        <td>
-                                                            <button type="button" id="editCategory" class="btn btn-warning btn-sm tt " title='แก้ไขหมวดหมู่'>
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                            <button type="button" id="del_btn" class="btn btn-danger btn-sm tt " title='ลบหมวดหมู่'>
-                                                                <i class="far fa-trash-alt"></i>
-                                                            </button>
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="text-align:center;">
-                                                        <td>2</td>
-                                                        <td>ธงลายการ์ตูน</td>
-                                                        <td>10</td>
-                                                        <td>
-                                                            <button type="button" id="btn_edit" class="btn btn-warning btn-sm tt " title='แก้ไขหมวดหมู่'>
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                            <button type="button" id="btn_alt" class="btn btn-danger btn-sm tt " title='ลบหมวดหมู่'>
-                                                                <i class="far fa-trash-alt"></i>
-                                                            </button>
-
-                                                        </td>
-                                                    </tr>
+                                                                    </td>
+                                                                </tr>";
+                                                    }
+                                                    ?>
 
                                                 </tbody>
                                             </table>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -150,23 +138,18 @@
     </div>
     <!-- End of Page Wrapper -->
     <div id="modalAddCategory" class="modal fade">
-        <form class="modal-dialog modal-lg ">
+        <form class="modal-dialog modal-lg " action="../route.php?action=addcategory" method="post">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#3E49BB">
                     <h4 class="modal-title" style="color:white">เพิ่มหมวดหมู่</h4>
                 </div>
-
-
-
-
-
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
                             <span>หมวดหมู่ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="" name="" value="" placeholder="กรุณากรอกหมวดหมู่" maxlength="100">
+                            <input type="text" class="form-control" id="" name="cname" value="" placeholder="กรุณากรอกหมวดหมู่" maxlength="100">
                         </div>
                     </div>
 
@@ -179,16 +162,11 @@
         </form>
     </div>
     <div id="modalEditCategory" class="modal fade">
-        <form class="modal-dialog modal-lg " >
+        <form class="modal-dialog modal-lg ">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#eecc0b">
                     <h4 class="modal-title" style="color:white">แก้ไขหมวดหมู่</h4>
                 </div>
-
-
-
-
-
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
@@ -198,15 +176,6 @@
                             <input type="text" class="form-control" id="" name="" value="" placeholder="ดอกไม้" maxlength="100">
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" type="submit">บันทึก</button>
