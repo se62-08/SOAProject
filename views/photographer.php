@@ -77,6 +77,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Prewedding & Photographer</h6>
             </div>
             <form action="./route.php?action=photographer" method="POST">
+<<<<<<< HEAD
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-bordered" id="d" width="100%" cellspacing="0">
@@ -116,6 +117,45 @@
                       ?>
                     </tbody>
                   </table>
+=======
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="d" width="100%" cellspacing="0">
+                      
+                      <thead>
+                        <tr>
+                          <th>ลำดับ</th>
+                          <th>ผู้เช่าบริการ</th>
+                          <th>ชุดแต่งงาน</th>
+                          <th>ช่างภาพ</th>
+                          <th>รูปแบบการเช่า</th>
+                          <th>ราคา</th>
+                          <th>จัดการ</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th>ลำดับ</th>
+                          <th>ผู้เช่าบริการ</th>
+                          <th>ชุดแต่งงาน</th>
+                          <th>ช่างภาพ</th>
+                          <th>รูปแบบการเช่า</th>
+                          <th>ราคา</th>
+                          <th>จัดการ</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <?php
+                        table2(5);
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+                <br/><br/>
+              
+>>>>>>> abdc43e569691d64f244a0aa1f44cc8ad4f75a33
                 </div>
               </div>
 
