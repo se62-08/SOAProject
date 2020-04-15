@@ -57,3 +57,8 @@
 
  <!-- Page level custom scripts -->
  <script src="../js/demo/chart-bar-demo.js"></script>
+ <script>
+     $(document).ready(function() {
+         $('.myTable').DataTable();
+     });
+ </script>

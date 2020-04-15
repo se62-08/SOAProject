@@ -26,7 +26,9 @@ switch ($_GET['action']) {
     case "history":
         history();
         break;
-
+    case "stock":
+        stock();
+        break;
         //billPhoto.php
     case "photographer":
         photographer();
@@ -42,6 +44,17 @@ switch ($_GET['action']) {
         $id = $_GET['data'];
         $num = $_GET['amount'];
         addequipment($id, $num);
+        break;
+    case "addequipment2":
+        $ename = $_POST['ename'];
+        $categoryid = $_POST['category'];
+        $price = $_POST['price'];
+        $upload_image = $_FILES['file']["name"];
+        $file = $_FILES['file'];
+        $fileName = basename($upload_image);
+        move_uploaded_file($_FILES["file"]["tmp_name"], "./image/product/" . $_FILES["file"]["name"]);
+        $path = "image/product/" . $fileName;
+        addequipment2($ename, $categoryid, $price, $path);
         break;
     case "confirmOrder":
         $data = $_GET['data'];
@@ -74,6 +87,30 @@ switch ($_GET['action']) {
     case "deletecategory":
         $cid = $_GET['cid'];
         deletecategory($cid);
+        break;
+    case "getinfoeditStock":
+        $eid = $_GET['eid'];
+        getinfoeditStock($eid);
+        break;
+    case "deleteStock":
+        $eid = $_GET['eid'];
+        deleteStock($eid);
+        break;
+    case "updateEquipment":
+        $eid = $_POST['eid'];
+        $ename = $_POST['ename'];
+        $categoryid = $_POST['category'];
+        $price = $_POST['price'];
+        $path = null;
+        if (!empty($_FILES["file"]["name"])) {
+            $upload_image = $_FILES['file']["name"];
+            $file = $_FILES['file'];
+            $fileName = basename($upload_image);
+            move_uploaded_file($_FILES["file"]["tmp_name"], "./image/product/" . $_FILES["file"]["name"]);
+            $path = "image/product/" . $fileName;
+        }
+
+        updateEquipment($eid, $ename, $categoryid, $price, $path);
         break;
     default:
         break;
@@ -112,7 +149,12 @@ function cart()
     $_SESSION['datacategory'] = categoryCallService::getAll();
     $_SESSION['dataequipment'] = equipmentCallService::getAll();
 }
-
+function stock()
+{
+    header("Location: views/stock.php");
+    $_SESSION['datacategory'] = categoryCallService::getAll();
+    $_SESSION['dataequipment'] = equipmentCallService::getAll();
+}
 
 function history()
 {
@@ -177,6 +219,18 @@ function  addequipment($id, $num)
                     </td>
                 </tr>";
     echo $content;
+}
+function  addequipment2($ename, $cid, $price, $path)
+{
+    $obj = categoryCallService::getCategoryById($cid);
+    $array = array();
+    $array['ename'] = $ename;
+    $array['category'] = $obj[0];
+    $array['price'] = (int) $price;
+    $array['pathpic'] = $path;
+    echo json_encode($array);
+    equipmentCallService::createEquipment($array);
+    stock();
 }
 function  summitOrder()
 {
@@ -254,5 +308,29 @@ function   deletecategory($cid)
 {
     $obj = categoryCallService::getCategoryById($cid);
     categoryCallService::deleteCategory($obj[0]);
-    //category();
+}
+function   getinfoeditStock($eid)
+{
+    $obj = equipmentCallService::getEquipmentsbyId($eid);
+    echo json_encode($obj);
+}
+function   updateEquipment($eid, $ename, $categoryid, $price, $path)
+{
+    echo $eid . $ename . $categoryid . $price . $path;
+    $obj = equipmentCallService::getEquipmentsbyId($eid);
+    //print_r($obj);
+    $objCategory = categoryCallService::getCategoryById($categoryid);
+    $obj[0]->category = $objCategory[0];
+    $obj[0]->ename = $ename;
+    $obj[0]->price = (int) $price;
+    if ($path != null) {
+        $obj[0]->pathpic = $path;
+    }
+    equipmentCallService::updateEquipment($obj[0]);
+    stock();
+}
+function   deleteStock($eid)
+{
+    $obj = equipmentCallService::getEquipmentsbyId($eid);
+    equipmentCallService::deleteEquipment($obj[0]);
 }

@@ -122,7 +122,7 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item active">
-        <a class="nav-link" href="stock.php">
+        <a class="nav-link" href="../route.php?action=stock">
             <div style="text-align: center">
                 <i class="fas fa-archive"></i>
                 <span>รายการสินค้า</span>
