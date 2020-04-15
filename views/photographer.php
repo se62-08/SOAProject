@@ -80,14 +80,7 @@
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table table-bordered" id="d" width="100%" cellspacing="0">
-                      <colgroup>
-                            <col  width="100">
-                            <col  width="100">
-                            <col  width="100">
-                            <col  width="100">
-                            <col  width="100">
-                            <col  width="100">
-                      </colgroup>
+                      
                       <thead>
                         <tr>
                           <th>ลำดับ</th>
