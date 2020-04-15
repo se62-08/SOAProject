@@ -139,4 +139,12 @@
         </a>
     </li>
     <hr class="sidebar-divider">
+    <li class="nav-item active">
+        <a class="nav-link" href="photographer.php">
+            <div style="text-align: center">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>ออกจากระบบ</span>
+            </div>
+        </a>
+    </li>
 </ul>
