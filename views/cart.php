@@ -62,13 +62,11 @@ $dataequipment = $_SESSION['dataequipment'];
               <div class="card-body">
                 <div class="table-responsive">
                   <center>
-                    <table class="table table-bordered" id="d" style="text-align:center;" width="80%" cellspacing="0">
+                    <table class="table table-bordered" id="tableOrderAll" style="text-align:center;" width="80%" cellspacing="0">
 
                       <thead>
                         <tr>
-                          <th>ลำดับ</th>
                           <th>ภาพสินค้า</th>
-                          <th>รหัสสินค้า</th>
                           <th>รายการ</th>
                           <th>จำนวน</th>
                           <th>ราคาเช่าต่อชิ้น(บาท)</th>
@@ -77,25 +75,16 @@ $dataequipment = $_SESSION['dataequipment'];
                         </tr>
                       </thead>
 
-                      <tbody>
-                        <?php
-                        //getProducts();
-                        //$products_list = getProducts();
-                        //@var_dump($products_list);
-                        table2(4);
-                        // table2(13);
-                        ?>
+                      <tbody id="tableOrder">
+
                       </tbody>
                     </table>
                   </center>
                   <!-- <img src="./img/a.jpg" width= “30” height=“50”> -->
                   <span>
-
-                    <a href=" ./bill.php">
-                      <button type="button" id="btn_green" class="btn btn-success">
-                        ยืนยัน
-                      </button>
-                    </a>
+                    <button type="button" id="btn_green" class="btn btn-success btnconfirm">
+                      ยืนยัน
+                    </button>
 
                   </span>
 
@@ -184,9 +173,45 @@ $dataequipment = $_SESSION['dataequipment'];
     <i class="fas fa-angle-up"></i>
   </a>
   <script>
-    $(".btnaddproduct").click(function() {
+    $(document).on("click", ".btnaddproduct", function() {
       var x = $(this).attr('eid');
-      alert(x);
+      var num = $("#numequipment_" + x).val();
+      $.ajax('../route.php?action=addequipment', {
+        data: {
+          data: x,
+          amount: num
+        },
+        success: function(data, status, xhr) { // success callback function
+          $("#tableOrder").append(data);
+        },
+        error: function(jqXhr, textStatus, errorMessage) { // error callback 
+          alert(errorMessage);
+        }
+      });
+    });
+    $(document).on("click", ".btndel", function() {
+      $(this).parent().parent().remove();
+    });
+    $(document).on("click", ".btnconfirm", function() {
+      var tbl = $('#tableOrderAll tr:has(td)').map(function(i, v) {
+        var $td = $('td', this);
+        return {
+          id: $td.eq(1).text(),
+          amount: $td.eq(3).text()
+        }
+      }).get();
+      $.ajax('../route.php?action=confirmOrder', {
+        data: {
+          data: tbl
+        },
+        success: function(data, status, xhr) { // success callback function
+          window.location.replace('./bill.php');
+        },
+        error: function(jqXhr, textStatus, errorMessage) { // error callback 
+          alert(errorMessage);
+        }
+      });
+
     });
     $("#category").change(function() {
       var x = $(this).val();
@@ -195,7 +220,6 @@ $dataequipment = $_SESSION['dataequipment'];
           data: x
         },
         success: function(data, status, xhr) { // success callback function
-          console.log(data);
           $('#tableProduct').html(data);
         },
         error: function(jqXhr, textStatus, errorMessage) { // error callback 

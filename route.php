@@ -3,6 +3,8 @@ require_once "./controller/loginService.php";
 require_once "./controller/cartService.php";
 require_once "./controller/categoryCallService.php";
 require_once "./controller/equipmentCallService.php";
+require_once "./controller/orderitemCallService.php";
+session_start();
 switch ($_GET['action']) {
         //index.php
     case "login":
@@ -33,6 +35,19 @@ switch ($_GET['action']) {
     case "refreshcategory":
         $id = $_GET['data'];
         refreshcategory($id);
+        break;
+    case "addequipment":
+        $id = $_GET['data'];
+        $num = $_GET['amount'];
+        addequipment($id, $num);
+        break;
+    case "confirmOrder":
+        $data = $_GET['data'];
+        $_SESSION['listOrder'] = $data;
+        break;
+    case "summitOrder":
+        summitOrder();
+        break;
     default:
         break;
 }
@@ -40,7 +55,6 @@ switch ($_GET['action']) {
 
 function login($password)
 {
-    session_start();
 
     //$_SESSION['token']=loginService::login($password);
     //if($_SESSION['token']->status != 401) {
@@ -111,4 +125,38 @@ function  refreshcategory($id)
           </div>";
     }
     echo $content;
+}
+function  addequipment($id, $num)
+{
+    $data = equipmentCallService::getEquipmentsbyId($id, $num);
+    $total = $num * $data[0]->price;
+    $content = "<tr>
+                    <td><img src=\"../{$data[0]->pathpic}\" width=\"40\" height=\"40\" alt=images></td>
+                    <td style=\"display:none;\">{$data[0]->eid}</td>
+                    <td>{$data[0]->ename}</td>
+                    <td>$num</td>
+                    <td>{$data[0]->price}</td>
+                    <td>$total</td>
+                    <td style=\"text-align:center;\">
+                    <button type=\"button\" id=\"delete\" class=\"btn btn-danger btn-sm btndel\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"ยกเลิก\">
+                        <i class=\"far fa-trash-alt\"></i>
+                    </button>
+                    </td>
+                </tr>";
+    echo $content;
+}
+function  summitOrder()
+{
+    $listOrder = $_SESSION['listOrder'];
+    $name = $_POST['name'];
+    $myDateS = $_POST['myDateS'];
+    $myDateE = $_POST['myDateE'];
+    $tel = $_POST['tel'];
+    $email = $_POST['email'];
+    $total = $_POST['total'];
+    $objOrderNew = orderitemCallService::createOrderitem($name, $myDateS, $myDateE, $tel, $email, $total);
+    $objOrderNew[0];
+
+
+    //header("Location: views/cart.php");
 }
