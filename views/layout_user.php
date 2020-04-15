@@ -113,7 +113,7 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item active">
-        <a class="nav-link" href="categoryStock.php">
+        <a class="nav-link" href="../route.php?action=category">
             <div style="text-align: center">
                 <i class="fas fa-boxes"></i>
                 <span>หมวดหมู่สินค้า</span>

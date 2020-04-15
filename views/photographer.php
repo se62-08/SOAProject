@@ -28,8 +28,29 @@
 
             <!-- Page Heading -->
             <div bgcolor= “green” class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Product & Photographer</h1>
+              <h1 class="h3 mb-0 text-gray-800">Prewedding & Photographer</h1>
             </div>
+            <div class="row">
+
+                        <div class="col-xl-3 col-12 mb-4">
+
+                            <div class="card border-left-primary card-color-info shadow h-100 py-2" style=cursor:pointer; id="addStock">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold  text-uppercase mb-1">เพิ่มสินค้า</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">+1 รายการ </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="far fa-plus-square fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
 
        <!-- ตัวอย่างและตำแหน่งของ card -->
             <!-- <div class="row">
@@ -53,7 +74,7 @@
             <!-- Content Row -->
             <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Product</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Prewedding & Photographer</h6>
             </div>
             <form action="./route.php?action=photographer" method="POST">
                 <div class="card-body">
@@ -70,21 +91,23 @@
                       <thead>
                         <tr>
                           <th>ลำดับ</th>
-                          <th>รหัสสินค้า</th>
-                          <th>สินค้า</th>
-                          <th>ราคา/set</th>
-                          <th>จำนวน (set)</th>
-                          <th>หมายเหตุ</th>
+                          <th>ผู้เช่าบริการ</th>
+                          <th>ชุดแต่งงาน</th>
+                          <th>ช่างภาพ</th>
+                          <th>รูปแบบการเช่า</th>
+                          <th>ราคา</th>
+                          <th>จัดการ</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
                           <th>ลำดับ</th>
-                          <th>รหัสสินค้า</th>
-                          <th>สินค้า</th>
-                          <th>ราคา/set</th>
-                          <th>จำนวน (set)</th>
-                          <th>หมายเหตุ</th>
+                          <th>ผู้เช่าบริการ</th>
+                          <th>ชุดแต่งงาน</th>
+                          <th>ช่างภาพ</th>
+                          <th>รูปแบบการเช่า</th>
+                          <th>ราคา</th>
+                          <th>จัดการ</th>
                         </tr>
                       </tfoot>
                       <tbody>
@@ -98,59 +121,6 @@
                 
                 <br/><br/>
               
-                </div>
-
-              <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Photographer</h6>
-                </div>
-                
-                <br/><br/>
-                
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-bordered" id="d" width="100%" cellspacing="0">
-                      <colgroup>
-                            <col  width="100">
-                            <col  width="100">
-                            <col  width="100">
-                            <col  width="100">
-                            <col  width="100">
-                            <col  width="100">
-                      </colgroup>
-                      <thead>
-                        <tr>
-                          <th>ลำดับ</th>
-                          <th>รหัสช่างภาพ</th>
-                          <th>ช่างภาพ</th>
-                          <th>เรทราคา</th>
-                          <th>ระยะเวลาการจ้างงาน</th>
-                          <th>วันที่ต้องการถ่ายภาพ</th>
-                        </tr>
-                      </thead>
-                      <tfoot>
-                        <tr>
-                          <th>ลำดับ</th>
-                          <th>รหัสช่างภาพ</th>
-                          <th>ช่างภาพ</th>
-                          <th>เรทราคา</th>
-                          <th>ระยะเวลาการจ้างงาน</th>
-                          <th>วันที่ต้องการถ่ายภาพ</th>
-                        </tr>
-                      </tfoot>
-                      <tbody>
-                        <?php
-                        table2(6);
-                        ?>
-                      </tbody>
-                    </table>
-                    <br/><br/>
-                    <a href="./billPhoto.php">
-                        <button type="button" id="btn_green" class="btn btn-success">
-                                  ยืนยัน
-                        </button>
-                    </a>
-                  </div>
                 </div>
                 
                 <br/><br/>
@@ -191,26 +161,23 @@ function table2(int $column, $border = 1, $cellpadding = 1, $cellspacing = 1)
     ?>
         <tr>
             <td><?php echo "1"; ?></td>
-            <td><?php echo "000001"; ?></td>
-            <td><?php echo "แจกัน</br>" . "ดอกไม้</br>" . "ผ้าม่าน</br>"; ?></td>
-            <td><?php echo "1050"; ?></td>
-            <td><input type="number" class="product-quantity" id="quantity" name="quantity" min="0" max="100" name="quantity" value="0" size="2"></td>
-            <td><input type="text" name="note"><br /></td>
-        </tr>
-    <?php
-    }
-    if ($column == 6) {
-    ?>
-        <tr>
-            <td><?php echo "1"; ?></td>
-            <td><?php echo "000001"; ?></td>
+            <td><?php echo "นายโปแมน แสนดี"; ?></td>
+            <td>
+                <div class="product-image">
+                    <img src="../image/pre1.jpg" width="100" height="100" alt=images>
+                </div>
+            </td>
             <td><?php echo "นายคาเดี้ยน คาเมร่า"; ?></td>
-            <td><?php echo "ครึ่งวัน 1200</br>" . "เต็มวัน 2000</br>"; ?></td>
-            <td><select id="photographerprice">
-                    <option value="a">ครึ่งวัน</option>
-                    <option value="b">เต็มวัน</option>
-                </select></td>
-            <td><input type="date" id="myDate" name="myDate" value=""></td>
+            <td><?php echo "ครึ่งวัน"; ?></td>
+            <td><?php echo "6500"; ?></td>
+            <td style="text-align:center;">
+                <button type="button" id="editStock" class="btn btn-warning btn-sm tt " title='แก้ไขสินค้า'>
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button type="button" id="del_btn" class="btn btn-danger btn-sm btndel" data-toggle="tooltip" title="" data-original-title="ลบสินค้า">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </td>
         </tr>
     <?php
     }
