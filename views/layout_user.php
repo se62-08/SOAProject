@@ -134,7 +134,7 @@
         <a class="nav-link" href="photographer.php">
             <div style="text-align: center">
                 <i class="fas fa-archive"></i>
-                <span>สินค้า&ช่างภาพ</span>
+                <span>ชุดแต่งงาน&ช่างภาพ</span>
             </div>
         </a>
     </li>
