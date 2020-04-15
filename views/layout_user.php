@@ -104,7 +104,7 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item active">
-        <a class="nav-link" href="history.php">
+        <a class="nav-link" href="../route.php?action=history">
             <div style="text-align: center">
                 <i class="far fa-list-alt"></i>
                 <span>ประวัติการเช่าสินค้า</span>
@@ -113,7 +113,7 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item active">
-        <a class="nav-link" href="categoryStock.php">
+        <a class="nav-link" href="../route.php?action=category">
             <div style="text-align: center">
                 <i class="fas fa-boxes"></i>
                 <span>หมวดหมู่สินค้า</span>

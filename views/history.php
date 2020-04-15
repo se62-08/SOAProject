@@ -1,3 +1,8 @@
+<?php
+session_start();
+$dataOrderitem = $_SESSION['dataOrderitem'];
+date_default_timezone_set("Asia/Bangkok");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +16,7 @@
 
         <!-- อันนี้ไว้เรียกใช้แท็บข้างๆๆ -->
         <?php include "layout_user.php" ?>
-        
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -40,7 +45,7 @@
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">รายการการเช่าทั้งหมด
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">2 รายการ</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= count($dataOrderitem) ?> รายการ</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-home fa-2x"></i>
@@ -68,81 +73,46 @@
                                                 <thead>
                                                     <tr>
                                                         <th>ลำดับ</th>
-                                                        <th>หมายเลขคำสั่งจอง</th>
                                                         <th>รหัสธุรกิจ</th>
-                                                        <th>วันที่จอง</th>
+                                                        <th>ชื่อผู้เช่า</th>
+                                                        <th>วันที่เช่า</th>
                                                         <th>วันที่คืน</th>
                                                         <th>ราคา(บาท)</th>
                                                         <th>สถานะ</th>
-                                                        <th>รายละเอียด</th>
                                                         <th>การจัดการ</th>
-                        
+
                                                     </tr>
                                                 </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>ลำดับ</th>
-                                                        <th>หมายเลขคำสั่งจอง</th>
-                                                        <th>รหัสธุรกิจ</th>
-                                                        <th>วันที่จอง</th>
-                                                        <th>วันที่คืน</th>
-                                                        <th>ราคา(บาท)</th>
-                                                        <th>สถานะ</th>
-                                                        <th>รายละเอียด</th>
-                                                        <th>การจัดการ</th>
-                                                        
-                                                    </tr>
-                                                </tfoot>
                                                 <tbody>
+                                                    <?php
+                                                    for ($i = 0; $i < count($dataOrderitem); $i++) {
+                                                        $num = $i + 1;
+                                                        echo " <tr style=\"text-align:center;\">
+                                                                    <td>$num</td>
+                                                                    <td>{$dataOrderitem[$i]->owner}</td>
+                                                                    <td>{$dataOrderitem[$i]->nameCustomer}</td>
+                                                                    <td>" . date("d/m/Y", substr($dataOrderitem[$i]->dateStart, 0, -3)) . "</td>
+                                                                    <td>" . date("d/m/Y", substr($dataOrderitem[$i]->dateEnd, 0, -3)) . "</td>
+                                                                    <td>{$dataOrderitem[$i]->totalprice}</td>
+                                                                    <td>{$dataOrderitem[$i]->status}</td>
+                                                                    <td>";
+                                                        if ($dataOrderitem[$i]->status != "คืนแล้ว") {
+                                                            echo "<button type=\"button\"  class=\"btn btn-success btn-sm tt returnOrder\" oid=\"{$dataOrderitem[$i]->oid}\" nameCus=\"{$dataOrderitem[$i]->nameCustomer}\" title='คืนอุปกรณ์'>
+                                                                           <i class=\"fas fa-check\"></i>
+                                                                            </button>";
+                                                        }
+                                                        echo "
+                                                                        <button type=\"button\"  class=\"btn btn-info btn-sm tt detailRent\"  oid=\"{$dataOrderitem[$i]->oid}\" title='รายละเอียดการเช่า'>
+                                                                            <i class=\"fas fa-file-alt\"></i>
+                                                                        </button>
+                                                                        <button type=\"button\"  class=\"btn btn-danger btn-sm tt del_btn\" oid=\"{$dataOrderitem[$i]->oid}\"  nameCus=\"{$dataOrderitem[$i]->nameCustomer}\" title='ลบข้อมูลการเช่า'>
+                                                                            <i class=\"far fa-trash-alt\"></i>
+                                                                        </button>
 
-                                                    <tr style="text-align:center;">
-                                                        <td>1</td>
-                                                        <td>RD00001</td>
-                                                        <td>SOA_03</td>
-                                                        <td>14/03/2563</td>
-                                                        <td>20/03/2563</td>
-                                                        <td>500</td>
-                                                        <td>เกินกำหนด</td>
-                                                        
-                                                        <td>
-                                                            <button type="button" id="detailRent" class="btn btn-info btn-sm tt " title='รายละเอียดการเช่า'>
-                                                                <i class="fas fa-file-alt"></i>
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" id="editHistory" class="btn btn-warning btn-sm tt " title='แก้ไขรายละเอียด'>
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                            <button type="button" id="del_btn" class="btn btn-danger btn-sm tt " title='ลบข้อมูลการเช่า'>
-                                                                <i class="far fa-trash-alt"></i>
-                                                            </button>
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="text-align:center;">
-                                                        <td>2</td>
-                                                        <td>RD00002</td>
-                                                        <td>SOA_03</td>
-                                                        <td>18/03/2563</td>
-                                                        <td>21/03/2563</td>
-                                                        <td>1000</td>
-                                                        <td>ยังไม่ได้คืน</td>
-                                                        <td>
-                                                            <button type="button" id="btn_edit" class="btn btn-info btn-sm tt " title='รายละเอียดการเช่า'>
-                                                                <i class="fas fa-file-alt"></i>
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" id="btn_edit" class="btn btn-warning btn-sm tt " title='แก้ไขรายละเอียด'>
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                            <button type="button" id="btn_alt" class="btn btn-danger btn-sm tt " title='ลบข้อมูลการเช่า'>
-                                                                <i class="far fa-trash-alt"></i>
-                                                            </button>
-
-                                                        </td>
-                                                    </tr>
-
+                                                                    </td>
+                                                                </tr>";
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -175,7 +145,7 @@
                         <span>ผู้เช่า : </span>
                     </div>
                     <div class="col-xl-4 col-12">
-                        <input type="text" class="form-control" id="dormittel" value="นางสาวเอ มั่นคง" maxlength="100" disabled>
+                        <input type="text" class="form-control" id="nameCustomer" value="นางสาวเอ มั่นคง" maxlength="100" disabled>
                     </div>
                 </div>
                 <div class="row mb-4" style="margin:20px;">
@@ -183,15 +153,15 @@
                         <span>วันที่ยืม : </span>
                     </div>
                     <div class="col-xl-4 col-12">
-                        <input type="text" class="form-control" id="dormittel" value="14/03/2563" maxlength="100" disabled>
+                        <input type="text" class="form-control" id="dateS" value="14/03/2563" maxlength="100" disabled>
                     </div>
                 </div>
                 <div class="row mb-4" style="margin:20px;">
                     <div class="col-xl-4 col-12 text-right ">
-                        <span>จำนวนวันที่ยืม : </span>
+                        <span>วันที่คืน : </span>
                     </div>
                     <div class="col-xl-4 col-12">
-                        <input type="text" class="form-control" id="dormittel" value="7" maxlength="100" disabled>
+                        <input type="text" class="form-control" id="dateE" value="7" maxlength="100" disabled>
                     </div>
                 </div>
                 <div class="row mb-4" style="margin:20px;">
@@ -199,7 +169,7 @@
                         <span>เบอร์โทร : </span>
                     </div>
                     <div class="col-xl-4 col-12">
-                        <input type="text" class="form-control" id="dormittel" value="0975472542" maxlength="100" disabled>
+                        <input type="text" class="form-control" id="Tel" value="0975472542" maxlength="100" disabled>
                     </div>
                 </div>
                 <div class="row mb-4" style="margin:20px;">
@@ -207,32 +177,31 @@
                         <span>Email : </span>
                     </div>
                     <div class="col-xl-4 col-12">
-                        <input type="text" class="form-control" id="dormittel" value="AAA@hotmail.com" maxlength="100" disabled>
+                        <input type="text" class="form-control" id="Email" value="AAA@hotmail.com" maxlength="100" disabled>
                     </div>
                 </div>
                 <div class="row mb-4 " style=" margin:20px;">
                     <div class="col-sm-12">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
                             <thead>
                                 <tr role="row">
                                     <th rowspan="1" colspan="1">ลำดับ</th>
-                                    <th rowspan="1" colspan="1">รายการสินค้า</th>
+                                    <th rowspan="1" colspan="1">รูป</th>
+                                    <th rowspan="1" colspan="1">ชื่อรายการสินค้า</th>
                                     <th rowspan="1" colspan="1">ราคาต่อชิ้น(บาท)</th>
                                     <th rowspan="1" colspan="1">จำนวน</th>
-                                    <th rowspan="1" colspan="1">ราคา(บาท)</th>
-                                    
-
+                                    <th rowspan="1" colspan="1">ราคารวม(บาท)</th>
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="tableDetailOrder">
                                 <tr role="row">
                                     <td>1</td>
                                     <td>ดอกมะลิ</td>
                                     <td>5</td>
                                     <td>100</td>
                                     <td>500</td>
-                                  
+
                                 </tr>
 
                             </tbody>
@@ -326,17 +295,73 @@
         $('.tt').tooltip({
             trigger: "hover"
         });
-        $('#detailRent').click(function() {
-            $("#modelDetail").modal();
-        });
+        $('.detailRent').click(function() {
+            var id = $(this).attr('oid');
+            $.ajax('../route.php?action=tabeldetail', {
+                data: {
+                    oid: id
+                },
+                success: function(data, status, xhr) { // success callback function
+                    var objOrder = JSON.parse(data);
+                    $('#nameCustomer').val(objOrder[0].nameCustomer);
+                    $('#dateS').val(objOrder[0].dateStart);
+                    $('#dateE').val(objOrder[0].dateEnd);
+                    $('#Tel').val(objOrder[0].tel);
+                    $('#Email').val(objOrder[0].email);
+                    $('#tableDetailOrder').html(objOrder[0].objDetailOrder);
+                    console.log(objOrder);
+                    $("#modelDetail").modal();
+                },
+                error: function(jqXhr, textStatus, errorMessage) { // error callback 
+                    alert(errorMessage);
+                }
+            });
 
-        $('#editHistory').click(function() {
-            $("#modelEditHistory").modal();
         });
-        $('#del_btn').click(function() {
+        $('.returnOrder').click(function() {
+            var id = $(this).attr('oid');
+            var nameCus = $(this).attr('nameCus');
+            swal({
+                    title: "ยืนยันนการคืนอุปกรณ์",
+                    text: "ของคุณ " + nameCus + " หรือไม่ ?",
+                    icon: "success",
+                    buttons: true,
+
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("คืนรายการสำเร็จเรียบร้อยแล้ว", {
+                            icon: "success",
+                            buttons: false
+                        });
+                        setTimeout(function() {
+                            $.ajax('../route.php?action=returnOrder', {
+                                data: {
+                                    oid: id
+                                },
+                                success: function(data, status, xhr) { // success callback function
+                                    window.location.replace('../route.php?action=history');
+                                },
+                                error: function(jqXhr, textStatus, errorMessage) { // error callback 
+                                    alert(errorMessage);
+                                }
+                            });
+                        }, 1500);
+                    } else {
+                        swal("การลบไม่สำเร็จ");
+                        setTimeout(function() {
+                            swal.close()
+                        }, 1500);
+                    }
+                });
+
+        });
+        $('.del_btn').click(function() {
+            var id = $(this).attr('oid');
+            var nameCus = $(this).attr('nameCus');
             swal({
                     title: "คุณต้องการลบ",
-                    text: "RD00001 หรือไม่ ?",
+                    text: "รายการของ " + nameCus + " หรือไม่ ?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -347,9 +372,19 @@
                             icon: "success",
                             buttons: false
                         });
-                        // delete_1(uid);
+
                         setTimeout(function() {
-                            location.reload();
+                            $.ajax('../route.php?action=deleteOrder', {
+                                data: {
+                                    oid: id
+                                },
+                                success: function(data, status, xhr) { // success callback function
+                                    window.location.replace('../route.php?action=history');
+                                },
+                                error: function(jqXhr, textStatus, errorMessage) { // error callback 
+                                    alert(errorMessage);
+                                }
+                            });
                         }, 1500);
                     } else {
                         swal("การลบไม่สำเร็จ");

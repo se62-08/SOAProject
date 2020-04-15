@@ -4,6 +4,8 @@ require_once "./controller/cartService.php";
 require_once "./controller/categoryCallService.php";
 require_once "./controller/equipmentCallService.php";
 require_once "./controller/orderitemCallService.php";
+require_once "./controller/deteilOrderItemCallService.php";
+date_default_timezone_set("Asia/Bangkok");
 session_start();
 switch ($_GET['action']) {
         //index.php
@@ -21,8 +23,8 @@ switch ($_GET['action']) {
         cart();
         break;
         //bill.php
-    case "bill":
-        bill();
+    case "history":
+        history();
         break;
 
         //billPhoto.php
@@ -47,6 +49,22 @@ switch ($_GET['action']) {
         break;
     case "summitOrder":
         summitOrder();
+        break;
+    case "tabeldetail":
+        $id = $_GET['oid'];
+        tabeldetail($id);
+        break;
+    case "returnOrder":
+        $id = $_GET['oid'];
+        returnOrder($id);
+        break;
+    case "deleteOrder":
+        $id = $_GET['oid'];
+        deleteOrder($id);
+        break;
+    case "addcategory":
+        $cname = $_POST['cname'];
+        addcategory($cname);
         break;
     default:
         break;
@@ -73,18 +91,21 @@ function login($password)
 
 function cartOrder()
 {
-    header("Location: views/bill.php");
 }
 function category()
 {
+    header("Location: views/categoryStock.php");
+    $_SESSION['datacategory'] = categoryCallService::getAll();
 }
 function cart()
 {
 }
 
 
-function bill()
+function history()
 {
+    header("Location: views/history.php");
+    $_SESSION['dataOrderitem'] = orderitemCallService::getAllOrderitem();
 }
 
 function photographer()
@@ -155,8 +176,57 @@ function  summitOrder()
     $email = $_POST['email'];
     $total = $_POST['total'];
     $objOrderNew = orderitemCallService::createOrderitem($name, $myDateS, $myDateE, $tel, $email, $total);
-    $objOrderNew[0];
+    $data = array();
+    for ($i = 0; $i < count($listOrder); $i++) {
+        $amount = $listOrder[$i]->amount;
+        $data['amount'] = $amount;
+        unset($listOrder[$i]->amount);
+        $data['equipment'] = $listOrder[$i];
+        $data['orderitem'] = $objOrderNew[0];
 
-
-    //header("Location: views/cart.php");
+        $response = deteilOrderItemCallService::createdeteilOrderItem($data);
+    }
+    header("Location: views/history.php");
+}
+function  tabeldetail($id)
+{
+    $obj = orderitemCallService::getOrderitembyId($id);
+    $obj[0]->dateStart = date("d/m/Y", substr($obj[0]->dateStart, 0, -3));
+    $obj[0]->dateEnd = date("d/m/Y", substr($obj[0]->dateEnd, 0, -3));
+    $objDetailOrder = deteilOrderItemCallService::getDeteilOrderItembyOrderId($id);
+    $content = "";
+    for ($i = 0; $i < count($objDetailOrder); $i++) {
+        $num = $i + 1;
+        $total = $objDetailOrder[$i]->equipment->price * $objDetailOrder[$i]->amount;
+        $content .= "<tr style=\"text-align:center;\">
+                        <td>$num</td>
+                        <td><img src=\"../{$objDetailOrder[$i]->equipment->pathpic}\" width=\"40\" height=\"40\" alt=images></td>
+                        <td>{$objDetailOrder[$i]->equipment->ename}</td>
+                        <td>{$objDetailOrder[$i]->equipment->price}</td>
+                        <td>{$objDetailOrder[$i]->amount}</td>
+                        <td> $total</td>
+                    </tr>";
+    }
+    $obj[0]->objDetailOrder =  $content;
+    echo json_encode($obj);
+}
+function  returnOrder($id)
+{
+    $obj = orderitemCallService::getOrderitembyId($id);
+    $obj[0]->status = "คืนแล้ว";
+    orderitemCallService::updateOrderitem($obj[0]);
+}
+function   deleteOrder($id)
+{
+    $objOrder = orderitemCallService::getOrderitembyId($id);
+    $objDetailOrder = deteilOrderItemCallService::getDeteilOrderItembyOrderId($id);
+    for ($i = 0; $i < count($objDetailOrder); $i++) {
+        deteilOrderItemCallService::deleteDeteilOrderItem($objDetailOrder[$i]);
+    }
+    orderitemCallService::deleteOrderitem($objOrder[0]);
+}
+function   addcategory($cname)
+{
+    categoryCallService::createCategory($cname);
+    category();
 }
