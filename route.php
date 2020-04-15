@@ -66,6 +66,7 @@ switch ($_GET['action']) {
         $cname = $_POST['cname'];
         addcategory($cname);
         break;
+   
     default:
         break;
 }
