@@ -131,20 +131,30 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item active">
-        <a class="nav-link" href="photographer.php">
+        <a class="nav-link" href="../route.php?action=wedding">
             <div style="text-align: center">
                 <i class="fas fa-archive"></i>
-                <span>ชุดแต่งงาน&ช่างภาพ</span>
+                <span>เช่าชุดแต่งงาน</span>
             </div>
         </a>
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item active">
-        <a class="nav-link" href="photographer.php">
+        <a class="nav-link" href="../route.php?action=historydress">
+            <div style="text-align: center">
+                <i class="far fa-list-alt"></i>
+                <span>ประวัติการเช่าชุด</span>
+            </div>
+        </a>
+    </li>
+    <hr class="sidebar-divider">
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.php">
             <div style="text-align: center">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>ออกจากระบบ</span>
             </div>
         </a>
     </li>
+
 </ul>
