@@ -5,7 +5,16 @@
     <i class="fa fa-bars"></i>
   </button>
 
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
 
+    <ul>
+        <div class="text-left " style="padding-top:20px;color: #bf4040;">
+            <h5>ร้านเช่าอุปกรณ์ตกแต่ง</h5>
+        </div>
+    </ul>
 
   <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
