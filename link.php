@@ -57,7 +57,8 @@
 
  <!-- Page level custom scripts -->
  <script src="../js/demo/chart-bar-demo.js"></script>
-
- <link rel="stylesheet" type="text/css" href="jquery.datetimepicker.css">
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="jquery.datetimepicker.js"></script>
+ <script>
+     $(document).ready(function() {
+         $('.myTable').DataTable();
+     });
+ </script>

@@ -95,7 +95,7 @@
 
     <!-- Nav Item - Detail order -->
     <li class="nav-item active">
-        <a class="nav-link" href="cart.php">
+        <a class="nav-link" href="../route.php?action=cart">
             <div style="text-align: center">
                 <i class="fas fa-shopping-cart"></i>
                 <span>ทำรายการเช่าสินค้า</span>
@@ -122,7 +122,7 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item active">
-        <a class="nav-link" href="stock.php">
+        <a class="nav-link" href="../route.php?action=stock">
             <div style="text-align: center">
                 <i class="fas fa-archive"></i>
                 <span>รายการสินค้า</span>
@@ -131,20 +131,30 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item active">
-        <a class="nav-link" href="photographer.php">
+        <a class="nav-link" href="../route.php?action=wedding">
             <div style="text-align: center">
                 <i class="fas fa-archive"></i>
-                <span>ชุดแต่งงาน&ช่างภาพ</span>
+                <span>เช่าชุดแต่งงาน</span>
             </div>
         </a>
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item active">
-        <a class="nav-link" href="photographer.php">
+        <a class="nav-link" href="../route.php?action=historydress">
+            <div style="text-align: center">
+                <i class="far fa-list-alt"></i>
+                <span>ประวัติการเช่าชุด</span>
+            </div>
+        </a>
+    </li>
+    <hr class="sidebar-divider">
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.php">
             <div style="text-align: center">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>ออกจากระบบ</span>
             </div>
         </a>
     </li>
+
 </ul>
