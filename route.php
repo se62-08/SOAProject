@@ -391,7 +391,7 @@ function  summitOrder()
 
         $response = deteilOrderItemCallService::createdeteilOrderItem($data);
     }
-    header("Location: views/history.php");
+    history();
 }
 function  tabeldetail($id)
 {

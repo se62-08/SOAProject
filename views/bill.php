@@ -44,8 +44,7 @@
 
           <!-- Content Row -->
           <?php
-          print_r($list);
-          print_r($listOrder);
+
           ?>
           <div class="card shadow mb-4">
             <div class="card-header py-3">
